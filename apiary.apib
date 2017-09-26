@@ -1,80 +1,351 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://api.swarms.tech
 
-# swarms
+# SWARMS API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Our REST API allows you to manage your resources on our platform.
 
-## Questions Collection [/questions]
+### Authentication
 
-### List All Questions [GET]
+You authenticate by including your auth token in the `X-Auth` Header of the requests. You can request and discard your token with your credentials using the
+endpoints documented in the [Auth Token section](/reference/0/auth-token).
 
-+ Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+### Errors
 
-### Create a New Question [POST]
+The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md)
+are used. In case of an error, the body of the reponse will also contain an error `code` and a `message` as well as a user friendly `description` like:
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+```
+{
+    "code": 1000,
+    "message": "invalid credentials",
+    "description": "The given credentials did not match any user in our database"
+}
+```
+
+### Versioning
+
+The API is versioned in a `major.minor` format. You can specify the version to use by setting the 
+`X-API-Version` header in your requests. If this header is not present, it will default to the latest
+version. The response will also include the used API version in the `X-API-Version` header. The current version is `1.0`.
+
+### Feedback
+
+Our API docs are [hosted on GitHub](https://github.com/swarms/api-doc). We appreciate feedback there in issues or via email to `info@swarms.tech`. 
+
+## Auth Token [/auth]
+### Request an auth token [POST /auth/token/request]
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
     + Headers
 
-            Location: /questions/2
-
+            X-API-Version: 1.0
+        
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "email": "me@example.com",
+                "password": "password"
             }
+
++ Response 200 (application/json)
+
+        {
+            "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxLUlVdVpWSTRKcDFSOVlTTGFOUHBGOVFcL1kwcU95TG10RGt0TE5WaG5GV0hSNDBMTklkZzN4TVAyZ0NrT0N3YzhYQ1Q4cmZsZlprcVhOeE1VQzlaZ3RVRFZnU1dBOXBOVW04MWlhIiwiaXNzIjoia3dpcXByb3ZpZGVyIiwiZXhwIjoxNTA4OTI0NDAwLCJpYXQiOjE1MDYzMzI0MDAsImp0aSI6ImEwMWNmYTBkZjJlYjI2NWYzOTQ1NTkxYmMyOGY3MWEzNTg5ZDE3NjZlYmI4MmRhYTBjYTFhOGIwNzJkNzI1ODk0OWJmOTZkMTUyOTJjNTFmYWNmNGFkZDNkMDZjMDQ2YjExYmRjNmI2Yjc2YTYwNmZkN2JmMTI2MzQ4NWZhZGNhYzU0NjExMTU2NGNhNGNiMjhiZTg5MGNlNDY5MjMyY2QyNmI5ZmIzMTdhZTVhZmQ1NjE0NWQzOGExODg1MzdkZTUxMDMxYWQwYmY4YTY3YjNlNzVjMzkwNTVkZDUxNTQzZDY0ODNkNzc4OGEwOTQwMWY4YWQ0MjEyNTNhYmI3ZDEifQ.AzOxuj3DBELmFyphOJQxAlodA3PzDeBN6x4G5qO1H5s",
+            "expiresAt": "2017-10-25T09:40:00",
+            "userId": 42
+        }
+
+### Discard an auth token [POST /auth/token/discard]
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+
+## Tasks [/tasks]
+
+A `Task` is the unit of work that is displayed in a cohesive view on a mobile device. It consists of several
+`Components` which can be _interactive_ (like a `TextInput`) or _non-interactive_ (like an `Image`).
+Interactive components will produce results while the non-interactive ones won't. For an overview of all
+available components check out the [Components Overview](reference/components-overview).
+
++ Attributes (RESPONSETask)
+
+### List all Tasks [GET /tasks{?order}{?limit}{?search}{?before}{?after}]
+
++ Parameters
+
+    + order (array[string], optional)
+        
+        + Members
+            
+            + id
+            
+            + name
+            
+            + lastModifiedAt
+            
+            + createdAt
+
+    + limit (number, optional) - the number of tasks being fetched. Limit can range between 1 and 100 elements. Default is 10.
+    
+    + search (string, optional) - search for full word matches
+    
+    + before (number, optional) - fetch only elements before the one with this `id`
+    
+    + after (number, optional) - fetch only elements after the one with this `id`
+
++ Request
+
+    + Headers
+        
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (array[RESPONSETask])
+
+### Create a Task [POST]
+
++ Request (application/json)
+
+    + Attributes (REQUESTTask)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSETask)
+   
+   
+### Update a Task [PUT /tasks/{id}]
+
++ Parameter
+
+    + id (number) - id of the task
+
++ Request (application/json)
+
+    + Attributes (REQUESTTask)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSETask)
+    
+    
+### Delete a Task [DELETE /tasks/{id}]
+
++ Parameter
+
+    + id (number) - id of the task
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSETask)
+    
+# Group Components Overview
+
+Here you can see the all currently supported components that you can use to build your Tasks.
+The components will be shown below each other in the Task.
+
+## Interactive Components
+
+### BinaryCoice
+
+A `BinaryChoice` will display two labelled buttons to the worker. The worker can only select 
+one of them.
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `option1`  | string  | label for one  button        |
+| `option2`  | string  | label for the other button   |
+
+### ImageMarker
+
+
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+
+### Rating
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+### Stepper
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+### TextInput
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+### Toggle
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+### VideoRecording
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+## Non-interactive Components
+
+### Image
+
+A simple image that is displayed in the Task.
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+### Instruction
+
+An instruction for the worker.
+
+###### Attributes
+
+| name        | type    | description                  |
+|:------------|---------|------------------------------|
+| `text`      | string  | the instruction              |
+
+### Question
+
+A question for the worker.
+
+###### Attributes
+
+| name        | type    | description                  |
+|:------------|---------|------------------------------|
+| `text`      | string  | the question                 |
+
+
+### Video
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+            
+# Data Structures
+
+## DefaultAttributes
+
++ id: 1 (number) - id of the task
++ readOnly: false (boolean) - indicates whether task can be modified
++ lastModifiedAt: `2017-08-02T13:58:24` (string) - the datetime of the last modification of the task. In ??? format and UTC
++ createdAt: `2017-08-02T13:58:24` (string) - the datetime of the creation of the task. In ??? format and UTC
+
+## REQUESTTask (object)
+
++ name: My first Task (string) - name of the task
++ components (REQUESTPUTComponent) - components of the task
+
+## RESPONSETask (REQUESTTask)
+
++ Include DefaultAttributes
+
+## ComponentData
++ One of
+
+    + Properties
+        + landscape (boolean)
+        + minDurationInSeconds (number)
+        + maxDurationInSeconds (number)
+    + url (string)
+    + hint (string)
+    + text (string)
+    + Properties
+        + option1 (string)
+        + option2 (string)
+    + Properties
+        + steps (number)
+        + halfSetps (boolean)
+    + Properties
+        + min (number)
+        + max (number)
+        + steps (number)
+        + start (number)
+    + Properties
+        + label (string)
+        + checkedByDefault (boolean)
+    + Properties
+        + url (string)
+        + autoplay (boolean)
+        + repeat (boolean)
+
+
+## REQUESTPUTComponent (object)
+
++ type (enum) - depending on the type, different values must be set
+    + BinaryChoice (string)
+    + Image (string)
+    + ImageMarker (string)
+    + Instruction (string)
+    + Question (string)
+    + Rating (string)
+    + Stepper (string)
+    + TextInput (string)
+    + Toggle (string)
+    + Video (string)
+    + VideoRecording (string)
+    
++ sticky (boolean, optional) - whether the component should stick at the top of the screen on scrolling. Defaults to `false`
++ Include ComponentData
+
+## RESPONSEComponent (REQUESTPUTComponent)
+
++ sticky (boolean, required) - whether the component should stick at the top of the screen on scrolling
++ Include ComponentData
