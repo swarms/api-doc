@@ -95,7 +95,7 @@ available components check out the [Components Overview](reference/components-ov
             
             + createdAt
 
-    + limit (number, optional) - the number of tasks being fetched. Limit can range between 1 and 100 elements. Default is 10.
+    + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
     
     + search (string, optional) - search for full word matches
     
@@ -164,8 +164,193 @@ available components check out the [Components Overview](reference/components-ov
             X-Auth-Token: token
 
 + Response 200 (application/json)
+    
+    
+## Jobs [/jobs]
 
-    + Attributes (RESPONSETask)
+A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
+
++ Attributes (RESPONSEJob)
+
+### List all Jobs [GET /jobs{?order}{?limit}{?search}{?before}{?after}]
+
++ Parameters
+
+    + order (array[string], optional)
+        
+        + Members
+            
+            + id
+            
+            + name
+            
+            + lastModifiedAt
+            
+            + createdAt
+
+    + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
+    
+    + search (string, optional) - search for full word matches
+    
+    + before (number, optional) - fetch only elements before the one with this `id`
+    
+    + after (number, optional) - fetch only elements after the one with this `id`
+
++ Request
+
+    + Headers
+        
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (array[RESPONSEJob])
+
+### Create a Job [POST]
+
++ Request (application/json)
+
+    + Attributes (REQUESTJob)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSEJob)
+   
+   
+### Update a Job [PUT /jobs/{id}]
+
++ Parameter
+
+    + id (number) - id of the job
+
++ Request (application/json)
+
+    + Attributes (REQUESTJob)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSEJob)
+    
+    
+### Delete a Job [DELETE /jobs/{id}]
+
++ Parameter
+
+    + id (number) - id of the job
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+## Campaigns [/campaigns]
+
+A `Campaign` is a collection of `Jobs`. It defines under which conditions its jobs are published
+to our job market.
+
++ Attributes (RESPONSECampaign)
+
+### List all Campaigns [GET /campaigns{?order}{?limit}{?search}{?before}{?after}]
+
++ Parameters
+
+    + order (array[string], optional)
+        
+        + Members
+            
+            + id
+            
+            + name
+            
+            + lastModifiedAt
+            
+            + createdAt
+
+    + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
+    
+    + search (string, optional) - search for full word matches
+    
+    + before (number, optional) - fetch only elements before the one with this `id`
+    
+    + after (number, optional) - fetch only elements after the one with this `id`
+
++ Request
+
+    + Headers
+        
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (array[RESPONSECampaign])
+
+### Create a Campaign [POST]
+
++ Request (application/json)
+
+    + Attributes (REQUESTCampaign)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSECampaign)
+   
+   
+### Update a Campaign [PUT /campaign/{id}]
+
++ Parameter
+
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Attributes (REQUESTCampaign)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSECampaign)
+    
+    
+### Delete a Campaign [DELETE /camapign/{id}]
+
++ Parameter
+
+    + id (number) - id of the campaignJob a
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
     
 # Group Components Overview
 
@@ -294,6 +479,34 @@ A question for the worker.
 + components (REQUESTPUTComponent) - components of the task
 
 ## RESPONSETask (REQUESTTask)
+
++ Include DefaultAttributes
+
+## REQUESTJob (object)
+
++ name: My first Job (string) - name of the job
+
+## RESPONSEJob (REQUESTJob)
+
++ Include DefaultAttributes
+
+## REQUESTCampaign (object)
+
++ name: My first Campaign (string) - name of the campaign
++ title: bla (string) - title for jobs in this campaign on the job market
++ description: bla (string, optional) - description for jobs in this campaign on the job market
++ terms: bla (string, optional) - title for jobs in this campaign on the job market
++ estDuration: 10 sec (string) - estimated duration for jobs in this campaign
++ workerPayment: 0.01 (number) - payment (in USD) for workers who work on jobs in this campaign
++ maxResults: 3 (number) - number of results that should be generated for each job of the campaign
++ maxResultsPerWorker: 1 (number) - number of times a single worker can work on each job of the campaign
++ workerGroup: 1 (number, optional) - id of a workergroup to specify the workers that can work on jobs in this campaign
++ maxWorkTime: 10 min (string, optional) - time a worker has to finish a job of this campaign after starting working on it
++ maxUploadTime: 4 hours (string, optional) -  time a worker has to uplaod the results after finishing his work
++ maxReviewTime: 3 hours - (string, optional) - timeframe after the results have ben uploaded in which results can be (soft-) rejected before they get auto approved
+
+
+## RESPONSECampaign (REQUESTCampaign)
 
 + Include DefaultAttributes
 
