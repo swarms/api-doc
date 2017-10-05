@@ -30,6 +30,10 @@ The API is versioned in a `major.minor` format. You can specify the version to u
 `X-API-Version` header in your requests. If this header is not present, it will default to the latest
 version. The response will also include the used API version in the `X-API-Version` header. The current version is `1.0`.
 
+### Use of HTTP Verbs
+
+POST for everything with an action.
+
 ### Feedback
 
 Our API docs are [hosted on GitHub](https://github.com/swarms/api-doc). We appreciate feedback there in issues or via email to `info@swarms.tech`. 
@@ -314,17 +318,15 @@ to our job market.
 + Response 201 (application/json)
 
     + Attributes (RESPONSECampaign)
-   
-   
-### Update a Campaign [PUT /campaign/{id}]
+    
+    
+### Delete a Campaign [DELETE /camapigns/{id}]
 
 + Parameter
 
     + id (number) - id of the campaign
 
 + Request (application/json)
-
-    + Attributes (REQUESTCampaign)
 
     + Headers
     
@@ -333,14 +335,125 @@ to our job market.
 
 + Response 200 (application/json)
 
-    + Attributes (RESPONSECampaign)
-    
-    
-### Delete a Campaign [DELETE /camapign/{id}]
+### Publish a Campaign [POST /camapigns/{id}/publish]
 
 + Parameter
 
-    + id (number) - id of the campaignJob a
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+### Pause an active Campaign [POST /camapigns/{id}/pause]
+
++ Parameter
+
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+### Continue a paused Campaign [POST /camapigns/{id}/continue]
+
++ Parameter
+
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+### Cancel a published Campaign [POST /camapigns/{id}/cancel]
+
++ Parameter
+
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+
+## Results [/results]
+
+* results for campaigns
+* auto approve after some time
+* reject
+* approve
+* soft reject
+
+### List all Results for a Campaign [GET /campaigns/{id}/results]
+
++ Parameter
+
+    + id (number) - id of the result
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+### Approve a Result [POST /results/{id}/approve]
+
++ Parameter
+
+    + id (number) - id of the result
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+### Reject a Result [POST /results/{id}/reject]
+
++ Parameter
+
+    + id (number) - id of the result
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+### Soft-reject a Result [POST /results/{id}/soft-reject]
+
++ Parameter
+
+    + id (number) - id of the result
 
 + Request (application/json)
 
