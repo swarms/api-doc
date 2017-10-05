@@ -262,6 +262,64 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 
 + Response 200 (application/json)
 
+# Tasks of a Job [/jobs/{id}/tasks]
+
+kajsdnfkjasdnfsdanf
+adsflkmsadf
+adsflkndasf
+adsfklm
+
+### List Tasks of a Job [GET /jobs/{id}/tasks]
+
++ Parameter
+
+    + id (number) - id of the job
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+        + Attributes (array[number])
+
+### Add Tasks to a Job [POST /jobs/{id}/tasks]
+
++ Parameter
+
+    + id (number) - id of the job
+
++ Request (application/json)
+
+    + Attributes (array[number])
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+### Update Tasks of a Job [PUT /jobs/{id}/tasks]
+
++ Parameter
+
+    + id (number) - id of the job
+
++ Request (application/json)
+
+    + Attributes (array[number])
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
 ## Campaigns [/campaigns]
 
 A `Campaign` is a collection of `Jobs`. It defines under which conditions its jobs are published
@@ -335,10 +393,77 @@ to our job market.
 
 + Response 200 (application/json)
 
-### Publish a Campaign [POST /camapigns/{id}/publish]
+# Jobs of a Campaign [/campaigns/{id}/jobs]
+
+kajsdnfkjasdnfsdanf
+adsflkmsadf
+adsflkndasf
+adsfklm
+
+### List Jobs of a Campaign [GET /campaigns/{id}/jobs]
 
 + Parameter
 
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+        + Attributes (array[number])
+
+### Add Jobs to a Campaign [POST /campaigns/{id}/jobs]
+
++ Parameter
+
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Attributes (array[number])
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+### Update Jobs of a Campaign [PUT /campaigns/{id}/jobs]
+
++ Parameter
+
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Attributes (array[number])
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+# Campaign Lifecycle [/campaigns/{id}]
+
+kajsdnfkjasdnfsdanf
+adsflkmsadf
+adsflkndasf
+adsfklm
+
+![test](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/CampaignStates+(1).svg)
+
+### Publish a Campaign [POST /camapigns/{id}/publish]
+
++ Parameter
+u
     + id (number) - id of the campaign
 
 + Request (application/json)
@@ -404,6 +529,8 @@ to our job market.
 * approve
 * soft reject
 
++ Attributes (RESPONSEComponentResult)
+
 ### List all Results for a Campaign [GET /campaigns/{id}/results]
 
 + Parameter
@@ -418,6 +545,8 @@ to our job market.
             X-Auth-Token: token
 
 + Response 200 (application/json)
+
+    + Attributes (array[RESPONSEComponentResult])
 
 ### Approve a Result [POST /results/{id}/approve]
 
@@ -589,7 +718,7 @@ A question for the worker.
 ## REQUESTTask (object)
 
 + name: My first Task (string) - name of the task
-+ components (REQUESTPUTComponent) - components of the task
++ components (REQUESTComponent) - components of the task
 
 ## RESPONSETask (REQUESTTask)
 
@@ -653,7 +782,7 @@ A question for the worker.
         + repeat (boolean)
 
 
-## REQUESTPUTComponent (object)
+## REQUESTComponent (object)
 
 + type (enum) - depending on the type, different values must be set
     + BinaryChoice (string)
@@ -671,7 +800,35 @@ A question for the worker.
 + sticky (boolean, optional) - whether the component should stick at the top of the screen on scrolling. Defaults to `false`
 + Include ComponentData
 
-## RESPONSEComponent (REQUESTPUTComponent)
+## RESPONSEComponent (REQUESTComponent)
 
 + sticky (boolean, required) - whether the component should stick at the top of the screen on scrolling
 + Include ComponentData
+
+## ComponentResultData
++ One of
+
+    + url (string)
+    + selectedOption (string)
+    + accepted (boolean)
+    + rating (number)
+    + result (number)
+    + text (string)
+    + checked (boolean)
+    
+    
+## REQUESTComponentResult (object)
+
++ type (enum) - depending on the type of the component
+    + AdvancedImageMarkerResult (string)
+    + BinaryChoiceResult (string)
+    + RatingResult (string)
+    + SimpleImageMarkerResult (string)
+    + StepperResult (string)
+    + TextInputResult (string)
+    + ToggleResult (string)
+    + VideoRecordingResult (string)
+    
++ Include ComponentResultData
+
+## RESPONSEComponentResult (REQUESTComponentResult)
