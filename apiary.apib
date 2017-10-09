@@ -5,6 +5,9 @@ HOST: https://api.swarms.tech
 
 Our REST API allows you to manage your resources on our platform.
 
+### Our models
+asfd
+
 ### Authentication
 
 You authenticate by including your auth token in the `X-Auth` Header of the requests. You can request and discard your token with your credentials using the
@@ -24,6 +27,10 @@ are used. In case of an error, the body of the reponse will also contain an erro
 }
 ```
 
+### Time Formatting
+
+All UTC, bla bla bla
+
 ### Versioning
 
 The API is versioned in a `major.minor` format. You can specify the version to use by setting the 
@@ -37,6 +44,7 @@ POST for everything with an action.
 ### Feedback
 
 Our API docs are [hosted on GitHub](https://github.com/swarms/api-doc). We appreciate feedback there in issues or via email to `info@swarms.tech`. 
+
 
 ## Auth Token [/auth]
 ### Request an auth token [POST /auth/token/request]
@@ -116,7 +124,7 @@ available components check out the [Components Overview](reference/components-ov
 
 + Response 200 (application/json)
 
-    + Attributes (array[RESPONSETask])
+    + Attributes (RESPONSETaskList)
 
 ### Create a Task [POST]
 
@@ -209,7 +217,7 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 
 + Response 200 (application/json)
 
-    + Attributes (array[RESPONSEJob])
+    + Attributes (RESPONSEJobList)
 
 ### Create a Job [POST]
 
@@ -360,7 +368,7 @@ to our job market.
 
 + Response 200 (application/json)
 
-    + Attributes (array[RESPONSECampaign])
+    + Attributes (RESPONSECampaignList)
 
 ### Create a Campaign [POST]
 
@@ -463,7 +471,7 @@ adsfklm
 ### Publish a Campaign [POST /camapigns/{id}/publish]
 
 + Parameter
-u
+
     + id (number) - id of the campaign
 
 + Request (application/json)
@@ -529,7 +537,7 @@ u
 * approve
 * soft reject
 
-+ Attributes (RESPONSEComponentResult)
++ Attributes (RESPONSEJobResult)
 
 ### List all Results for a Campaign [GET /campaigns/{id}/results]
 
@@ -546,7 +554,7 @@ u
 
 + Response 200 (application/json)
 
-    + Attributes (array[RESPONSEComponentResult])
+    + Attributes (array[RESPONSEJobResult])
 
 ### Approve a Result [POST /results/{id}/approve]
 
@@ -718,7 +726,7 @@ A question for the worker.
 ## REQUESTTask (object)
 
 + name: My first Task (string) - name of the task
-+ components (REQUESTComponent) - components of the task
++ components (array[REQUESTComponent]) - components of the task
 
 ## RESPONSETask (REQUESTTask)
 
@@ -752,7 +760,27 @@ A question for the worker.
 
 + Include DefaultAttributes
 
+## RESPONSETaskResult (object)
++ task (number)
++ startedAt (string)
++ completedAt (string)
++ componentResults (array[RESPONSEComponentResult])
+
+## RESPONSEJobResult (object)
+
++ id (number)
++ worker (number)
++ job (number)
++ startedAt (string)
++ completedAt (string)
++ state (enum)
+    + InReview
+    + Approved
+    + Rejected
++ componentResults (array[RESPONSETaskResult])
+
 ## ComponentData
+
 + One of
 
     + Properties
@@ -832,3 +860,27 @@ A question for the worker.
 + Include ComponentResultData
 
 ## RESPONSEComponentResult (REQUESTComponentResult)
+
+## HATEAOSLink (object)
+
++ href (string)
+
+## PaginationLinks (object)
+
++ next (HATEAOSLink)
++ previous (HATEAOSLink)
+
+## RESPONSETaskList (object)
+
++ _links (PaginationLinks)
++ tasks (array[RESPONSETask])
+
+## RESPONSEJobList (object)
+
++ _links (PaginationLinks)
++ jobs (array[RESPONSEJob])
+
+## RESPONSECampaignList (object)
+
++ _links (PaginationLinks)
++ campaigns (array[RESPONSECampaign])
