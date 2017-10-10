@@ -3,12 +3,15 @@ HOST: https://api.swarms.tech
 
 # SWARMS API
 
-Our REST API allows you to manage your resources on our platform.
-
-### Our models
-asfd
+The SWARMS API is built around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
+API requests and responses are formatted in JSON. We use common HTTP methods for the requests on our API.
+Requests to perform actions, e.g. like activating a campaign, will use `POST`. HTTP requests will be redirected to HTTPS. You will need
+to authenticate in order to use th API.
 
 ### Authentication
+You will need to have credentials in order to authenticate and recieve an auth token which you need to send in your requests.
+At the moment, you need to contact us at `info@swarms.tech` in order to receive credentials for our platform which
+you can use to authenticate. A signup endpoint will come soon.
 
 You authenticate by including your auth token in the `X-Auth` Header of the requests. You can request and discard your token with your credentials using the
 endpoints documented in the [Auth Token section](/reference/0/auth-token).
@@ -17,7 +20,7 @@ endpoints documented in the [Auth Token section](/reference/0/auth-token).
 ### Errors
 
 The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md)
-are used. In case of an error, the body of the reponse will also contain an error `code` and a `message` as well as a user friendly `description` like:
+are used. In case of a 4XX respone, the body of the reponse will contain an error `code` and a `message` as well as a user friendly `description` like:
 
 ```
 {
@@ -27,9 +30,13 @@ are used. In case of an error, the body of the reponse will also contain an erro
 }
 ```
 
+Each response will contain a `X-Request-ID` header with an UUID identifying that request. In case you encounter
+weird behaviour, please shoot us an email and include the request id in your message.
+
 ### Time Formatting
 
-All UTC, bla bla bla
+All timestamps are interpreted as being in the [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) timezone and formatted
+accoring to `ISO-8601`, like in `2017-08-02T13:58:24`.
 
 ### Versioning
 
@@ -37,9 +44,6 @@ The API is versioned in a `major.minor` format. You can specify the version to u
 `X-API-Version` header in your requests. If this header is not present, it will default to the latest
 version. The response will also include the used API version in the `X-API-Version` header. The current version is `1.0`.
 
-### Use of HTTP Verbs
-
-POST for everything with an action.
 
 ### Feedback
 
@@ -47,6 +51,11 @@ Our API docs are [hosted on GitHub](https://github.com/swarms/api-doc). We appre
 
 
 ## Auth Token [/auth]
+
+In order to access and manage your resources via the API, you need to send an API token in the `X-Auth-Token`
+header of your requests. You can can requests your auth token with your credenials. At the moment, you cannot
+sign up yourself on our platform. You can request your credentials via email at `info@swarms.tech`.
+
 ### Request an auth token [POST /auth/token/request]
 
 + Request (application/json)
@@ -272,10 +281,7 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 
 # Tasks of a Job [/jobs/{id}/tasks]
 
-kajsdnfkjasdnfsdanf
-adsflkmsadf
-adsflkndasf
-adsfklm
+You can add, update and get the tasks of a job.
 
 ### List Tasks of a Job [GET /jobs/{id}/tasks]
 
@@ -331,7 +337,8 @@ adsfklm
 ## Campaigns [/campaigns]
 
 A `Campaign` is a collection of `Jobs`. It defines under which conditions its jobs are published
-to our job market.
+to our job market. If you want to make a `Job` avauilable for our workers, you first need to add it to 
+a campaign first and publish this campaign to our Job Market.
 
 + Attributes (RESPONSECampaign)
 
@@ -403,10 +410,7 @@ to our job market.
 
 # Jobs of a Campaign [/campaigns/{id}/jobs]
 
-kajsdnfkjasdnfsdanf
-adsflkmsadf
-adsflkndasf
-adsfklm
+You can add, update and get the jobs of a campaign.
 
 ### List Jobs of a Campaign [GET /campaigns/{id}/jobs]
 
@@ -461,10 +465,11 @@ adsfklm
 
 # Campaign Lifecycle [/campaigns/{id}]
 
-kajsdnfkjasdnfsdanf
-adsflkmsadf
-adsflkndasf
-adsfklm
+The `Campaign`s state manages the availability of it's jobs on our Job Market. Initially, a `Campaign` is
+inactive. After you added Jobs to it, you can publish it to our Job Market which will set its state to `active`.
+When the `Campaign` is active, its Jobs are available on our Job Market and Workers can work on them by that
+generating results. You can `pause` an active campaign and continue its afterwards. When all results for a Campaign 
+have been generated, the campaign is set to `finished`. It is also possible to `cancel` a campaign after it has been published.
 
 ![test](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/CampaignStates+(1).svg)
 
@@ -531,11 +536,15 @@ adsfklm
 
 ## Results [/results]
 
-* results for campaigns
-* auto approve after some time
-* reject
-* approve
-* soft reject
+You can get the results that have been generated by the workers for the Jobs of a campaign. The results will
+be `in review` after they have been uploaded for as long as defined by the `maxReviewTime` in the `Campaign`.
+After that time, the result will get auto-approved and the worker paid.
+
+You can also `reject` a result when you can give a reason to the worker. In that case, the worker won't get paid
+and his reputation gets damaged.
+
+You can also ask a worker to redo the Job with a `soft-reject`. By that, te result will be rejected and the worker will be ask to
+do the Job again. This will have no effect on the worker's reputation.
 
 + Attributes (RESPONSEJobResult)
 
@@ -568,6 +577,8 @@ adsfklm
     
             X-API-Version: 1.0
             X-Auth-Token: token
+            
+    + Attributes (REQUESTApprove)
 
 + Response 200 (application/json)
 
@@ -583,6 +594,8 @@ adsfklm
     
             X-API-Version: 1.0
             X-Auth-Token: token
+        
+    + Attributes (REQUESTReject)
 
 + Response 200 (application/json)
 
@@ -598,6 +611,8 @@ adsfklm
     
             X-API-Version: 1.0
             X-Auth-Token: token
+            
+    + Attributes (REQUESTApprove)
 
 + Response 200 (application/json)
 
@@ -609,10 +624,50 @@ The components will be shown below each other in the Task.
 
 ## Interactive Components
 
+Interactive Components require the worker's input. These components will generate the results that
+can later be fetched.
+
+### AdvancedImageMarker
+
+The `AdvancedImageMarker` let's the worker draw on an image. For that, he has a shifted marker
+so that he does not draw with his fingertip directly and can better see what he's drawing. He
+can adjust the size of that marker and also can use it as an eraser. Rotating the phone will enable
+a landscape mode. This version of the ImageMarker will allow the worker to draw more precisely
+than with the `SimpleImageMarker` which in contrast is less complex.
+
+Here you can see the `AdvancedImageMarker` on the following image:
+
+![a](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/ImageMarkerSampleImage.png)
+
+![AdvancedImageMarker](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/AdvancedImageMarker.gif)
+
+This is how the result would look like in this case:
+
+![AdvancedImageMarkerResult](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/AdvancedImageMarkerResult.png)
+
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+###### Result
+
+| name   | type    | description                 |
+|:-------|---------|-----------------------------|
+| `url`  | string  | url of the segmentation url |
+
+
+
+
 ### BinaryCoice
 
 A `BinaryChoice` will display two labelled buttons to the worker. The worker can only select 
 one of them.
+
+![AdvancedImageMarker](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/BinaryChoice.gif)
+
 
 ###### Attributes
 
@@ -621,24 +676,66 @@ one of them.
 | `option1`  | string  | label for one  button        |
 | `option2`  | string  | label for the other button   |
 
-### ImageMarker
+###### Result
+
+| name              | type    | description     |
+|:------------------|---------|-----------------|
+| `selectedOption`  | string  | selected Option |
 
 
-
-###### Attributes
-
-| name       | type    | description                  |
-|:-----------|---------|------------------------------|
-| `url`      | string  | url of the image             |
 
 
 ### Rating
 
+A `Rating` component displays a simple Rating bar to the user. The worker must select at least one star.
+You can set the number of 
+
+
+![AdvancedImageMarker](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Rating.gif)
+
+
 ###### Attributes
 
 | name       | type    | description                  |
 |:-----------|---------|------------------------------|
 | `url`      | string  | url of the image             |
+
+###### Result
+
+| name      | type    | description     |
+|:----------|---------|-----------------|
+| `rating`  | number  | rating          |
+
+
+### SimpleImageMarker
+
+The `SimpleImageMarker` let's the worker draw with his fingertap on an image directy. He can zoom,
+redo and undo his changes and also use the landscape mode for his drawings. This ImageMarker  will
+be more efficient than the `AdvancedImageMarker` when the accuracy of the drawing is less important to you.
+
+Here you see an example use of the `SimpleImageMarker` on the following image:
+
+| input       | UI    | result                  |
+|:-----------|---------|------------------------------|
+| ![a](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/ImageMarkerSampleImage.png)      | ![SimpleImageMarker](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/SimpleImageMarker.gif) | ![SimpleImageMarkerResult](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/SimpleImageMarkerResult.png)|
+
+ 
+A url to the drawing from the worker will be included in the result as an transparent `.png` overlay.
+
+
+###### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the image             |
+
+###### Result
+
+| name   | type    | description                 |
+|:-------|---------|-----------------------------|
+| `url`  | string  | url of the segmentation url |
+
+
 
 ### Stepper
 
@@ -648,21 +745,56 @@ one of them.
 |:-----------|---------|------------------------------|
 | `url`      | string  | url of the image             |
 
+###### Result
+
+| name      | type    | description      |
+|:----------|---------|------------------|
+| `result`  | number  | selected counter |
+
+
+
 ### TextInput
+
+A `TextInput` will ask a worker for a short input via his keyboard. You can set a `hint` that is displayed
+in the input field before the worker starts typing.
+
+![textInput](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/TextInput.gif)
+
 
 ###### Attributes
 
 | name       | type    | description                  |
 |:-----------|---------|------------------------------|
 | `url`      | string  | url of the image             |
+
+###### Result
+
+| name    | type    | description     |
+|:--------|---------|-----------------|
+| `text`  | string  | blob |
+
+
 
 ### Toggle
 
+A `Toggle` can be used to ask for a simple `true`/`false` on a label. It can be set to be toggled by default.
+
+![AdvancedImageMarker](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Toggle.gif)
+
+
 ###### Attributes
 
 | name       | type    | description                  |
 |:-----------|---------|------------------------------|
 | `url`      | string  | url of the image             |
+
+###### Result
+
+| name       | type    | description     |
+|:-----------|---------|-----------------|
+| `checked`  | boolean | selected Option |
+
+
 
 ### VideoRecording
 
@@ -672,11 +804,22 @@ one of them.
 |:-----------|---------|------------------------------|
 | `url`      | string  | url of the image             |
 
+###### Result
+
+| name   | type    | description               |
+|:-------|---------|---------------------------|
+| `url`  | string  | url of the recorded video |
+
+
+
 ## Non-interactive Components
 
 ### Image
 
 A simple image that is displayed in the Task.
+
+![Image](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Image.png)
+
 
 ###### Attributes
 
@@ -684,25 +827,6 @@ A simple image that is displayed in the Task.
 |:-----------|---------|------------------------------|
 | `url`      | string  | url of the image             |
 
-### Instruction
-
-An instruction for the worker.
-
-###### Attributes
-
-| name        | type    | description                  |
-|:------------|---------|------------------------------|
-| `text`      | string  | the instruction              |
-
-### Question
-
-A question for the worker.
-
-###### Attributes
-
-| name        | type    | description                  |
-|:------------|---------|------------------------------|
-| `text`      | string  | the question                 |
 
 
 ### Video
@@ -720,24 +844,26 @@ A question for the worker.
 
 + id: 1 (number) - id of the task
 + readOnly: false (boolean) - indicates whether task can be modified
-+ lastModifiedAt: `2017-08-02T13:58:24` (string) - the datetime of the last modification of the task. In ??? format and UTC
-+ createdAt: `2017-08-02T13:58:24` (string) - the datetime of the creation of the task. In ??? format and UTC
++ lastModifiedAt: `2017-08-02T13:58:24` (string) - the datetime of the last modification of the task.
++ createdAt: `2017-08-02T13:58:24` (string) - the datetime of the creation of the task.
 
 ## REQUESTTask (object)
 
 + name: My first Task (string) - name of the task
 + components (array[REQUESTComponent]) - components of the task
 
-## RESPONSETask (REQUESTTask)
+## RESPONSETask (object)
 
++ include REQUESTTask
 + Include DefaultAttributes
 
 ## REQUESTJob (object)
 
 + name: My first Job (string) - name of the job
 
-## RESPONSEJob (REQUESTJob)
+## RESPONSEJob (object)
 
++ Include REQUESTJob
 + Include DefaultAttributes
 
 ## REQUESTCampaign (object)
@@ -756,8 +882,9 @@ A question for the worker.
 + maxReviewTime: 3 hours - (string, optional) - timeframe after the results have ben uploaded in which results can be (soft-) rejected before they get auto approved
 
 
-## RESPONSECampaign (REQUESTCampaign)
+## RESPONSECampaign (object)
 
++ Include REQUESTCampaign
 + Include DefaultAttributes
 
 ## RESPONSETaskResult (object)
@@ -768,7 +895,6 @@ A question for the worker.
 
 ## RESPONSEJobResult (object)
 
-+ id (number)
 + worker (number)
 + job (number)
 + startedAt (string)
@@ -778,6 +904,7 @@ A question for the worker.
     + Approved
     + Rejected
 + componentResults (array[RESPONSETaskResult])
++ id (number)
 
 ## ComponentData
 
@@ -884,3 +1011,16 @@ A question for the worker.
 
 + _links (PaginationLinks)
 + campaigns (array[RESPONSECampaign])
+
+## REQUESTApprove (object)
+
++ message (string, optional) - an optional message for the worker
+
+## REQUESTReject (object)
+
++ reason (string, required) - a reason for the rejection that is displayed to the worker
+
+## REQUESTSofReject (object)
+
++ reason (string, required) - a reason for the rejection that is displayed to the worker
++ until (string, required) - timestamp until the worker can redo the job
