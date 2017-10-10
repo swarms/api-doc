@@ -465,11 +465,14 @@ You can add, update and get the jobs of a campaign.
 
 # Campaign Lifecycle [/campaigns/{id}]
 
-The `Campaign`s state manages the availability of it's jobs on our Job Market. Initially, a `Campaign` is
-inactive. After you added Jobs to it, you can publish it to our Job Market which will set its state to `active`.
+The `Campaign`s state manages the availability of it's jobs on our Job Market.
+
+Initially, a `Campaign` is inactive. After you added Jobs to it, you can publish it to our Job Market which will set its state to `active`.
 When the `Campaign` is active, its Jobs are available on our Job Market and Workers can work on them by that
-generating results. You can `pause` an active campaign and continue its afterwards. When all results for a Campaign 
-have been generated, the campaign is set to `finished`. It is also possible to `cancel` a campaign after it has been published.
+generating results. You can `pause` an active campaign and continue its afterwards.When all results for
+a Campaign  have been generated, the campaign is set to `finished`.
+
+It is also possible to `cancel` a campaign after it has been published.
 
 ![test](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/CampaignStates+(1).svg)
 
@@ -842,10 +845,10 @@ A simple image that is displayed in the Task.
 
 ## DefaultAttributes
 
-+ id: 1 (number) - id of the task
-+ readOnly: false (boolean) - indicates whether task can be modified
-+ lastModifiedAt: `2017-08-02T13:58:24` (string) - the datetime of the last modification of the task.
-+ createdAt: `2017-08-02T13:58:24` (string) - the datetime of the creation of the task.
++ id: 1 (number) - id of the resource
++ readOnly: false (boolean) - indicates whether the resource can be modified
++ lastModifiedAt: `2017-08-02T13:58:24` (string) - the datetime of the last modification of the resource.
++ createdAt: `2017-08-02T13:58:24` (string) - the datetime of the creation of the resource.
 
 ## REQUESTTask (object)
 
@@ -869,17 +872,17 @@ A simple image that is displayed in the Task.
 ## REQUESTCampaign (object)
 
 + name: My first Campaign (string) - name of the campaign
-+ title: bla (string) - title for jobs in this campaign on the job market
-+ description: bla (string, optional) - description for jobs in this campaign on the job market
-+ terms: bla (string, optional) - title for jobs in this campaign on the job market
++ title: Review model images (string) - title for jobs in this campaign on the job market
++ description: You will see 20 models images which you should rate on a 1 to 5 scale. (string, optional) - description for jobs in this campaign on the job market
++ terms: Don't tell anyone about this. (string, optional) - title for jobs in this campaign on the job market
 + estDuration: 10 sec (string) - estimated duration for jobs in this campaign
 + workerPayment: 0.01 (number) - payment (in USD) for workers who work on jobs in this campaign
 + maxResults: 3 (number) - number of results that should be generated for each job of the campaign
 + maxResultsPerWorker: 1 (number) - number of times a single worker can work on each job of the campaign
 + workerGroup: 1 (number, optional) - id of a workergroup to specify the workers that can work on jobs in this campaign
-+ maxWorkTime: 10 min (string, optional) - time a worker has to finish a job of this campaign after starting working on it
++ maxWorkTime: 10 min (string, optional) - time a worker has to work on a job of this campaign
 + maxUploadTime: 4 hours (string, optional) -  time a worker has to uplaod the results after finishing his work
-+ maxReviewTime: 3 hours - (string, optional) - timeframe after the results have ben uploaded in which results can be (soft-) rejected before they get auto approved
++ maxReviewTime: 3 hours - (string, optional) - timeframe in which results can be (soft-) rejected before they get auto approved
 
 
 ## RESPONSECampaign (object)
@@ -994,8 +997,8 @@ A simple image that is displayed in the Task.
 
 ## PaginationLinks (object)
 
-+ next (HATEAOSLink)
-+ previous (HATEAOSLink)
++ next (HATEAOSLink) - url of the next page
++ previous (HATEAOSLink) - url of the previous page
 
 ## RESPONSETaskList (object)
 
@@ -1023,4 +1026,4 @@ A simple image that is displayed in the Task.
 ## REQUESTSofReject (object)
 
 + reason (string, required) - a reason for the rejection that is displayed to the worker
-+ until (string, required) - timestamp until the worker can redo the job
++ until (string, required) - timestamp until when the worker can redo the job
