@@ -623,7 +623,7 @@ do the Job again. This will have no effect on the worker's reputation.
             X-API-Version: 1.0
             X-Auth-Token: token
             
-    + Attributes (REQUESTApprove)
+    + Attributes (REQUESTSoftReject)
 
 + Response 200 (application/json)
 
@@ -906,7 +906,7 @@ and whether the audio should be played. The worker can pause and replay the vide
 + terms: Don't tell anyone about this. (string, optional) - title for jobs in this campaign on the job market
 + estDuration: 10 sec (string) - estimated duration for jobs in this campaign
 + workerPayment: 0.01 (number) - payment (in USD) for workers who work on jobs in this campaign
-+ maxResults: 3 (number) - number of results that should be generated for each job of the campaign
++ results: 3 (number) - number of results that should be generated for each job of the campaign
 + maxResultsPerWorker: 1 (number) - number of times a single worker can work on each job of the campaign
 + workerGroup: 1 (number, optional) - id of a workergroup to specify the workers that can work on jobs in this campaign
 + maxWorkTime: 10 min (string, optional) - time a worker has to work on a job of this campaign
@@ -1052,7 +1052,7 @@ and whether the audio should be played. The worker can pause and replay the vide
 
 + reason (string, required) - a reason for the rejection that is displayed to the worker
 
-## REQUESTSofReject (object)
+## REQUESTSoftReject (object)
 
 + reason (string, required) - a reason for the rejection that is displayed to the worker
 + until (string, required) - timestamp until when the worker can redo the job
