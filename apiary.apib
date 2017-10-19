@@ -5,9 +5,9 @@ HOST: https://api.swarms.tech
 
 Our API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
 It has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. 
-We use built-in HTTP features, like HTTP authentication and HTTP verbs. We support cross-origin 
+We use built-in HTTP featusres, like HTTP authentication and HTTP verbs. We support cross-origin 
 resource sharing, allowing you to interact securely with our API from a client-side application.
-All API responses will return JSON, including errors.
+All API responses, including errors, will return JSON.
 
 
 ### Authentication
@@ -37,16 +37,19 @@ Each response will contain a `X-Request-ID` header with an UUID identifying that
 weird behaviour, please <a href="mailto:info@swarms.tech?Subject=Error for request: <Request ID>" target="_top">send us an email</a>
 and include the request id in your message.
 
-### Time Formatting
-
-All timestamps are interpreted as being in the [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) timezone and formatted
-accoring to `ISO-8601`, like in `2017-08-02T13:58:24`.
 
 ### Versioning
 
-The API is versioned in a `major.minor` format. You can specify the version to use by setting the 
-`X-API-Version` header in your requests. If this header is not present, it will default to the latest
-version. The response will also include the used API version in the `X-API-Version` header. The current version is `1.0`.
+Our API is versioned in a `major.minor` format. You can specify the version to use by setting the 
+`X-API-Version` header in the requests. If this header is not present, it will default to the latest
+version. The response will also include the used API version in the `X-API-Version` header.
+The current API version is `1.0`.
+
+
+### Time Formatting
+
+Timestamps are returned in the [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) timezone and formatted
+accoring to `ISO-8601` standard, like in `2017-08-02T13:58:24`.
 
 
 ### Feedback
