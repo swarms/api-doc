@@ -22,8 +22,8 @@ create your account, please send us an email to <a href="mailto:info@swarms.tech
 
 ### Errors
 
-The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md)
-are used. In case of a 4XX respone, the body of the reponse will contain an error `code` and a `message` as well as a user friendly `description` like:
+For errors the common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used.
+The body of the reponse will contain an error `code` and a `message` as well as a user friendly `description` like:
 
 ```
 {
@@ -34,7 +34,8 @@ are used. In case of a 4XX respone, the body of the reponse will contain an erro
 ```
 
 Each response will contain a `X-Request-ID` header with an UUID identifying that request. In case you encounter
-weird behaviour, please shoot us an email and include the request id in your message.
+weird behaviour, please <a href="mailto:info@swarms.tech?Subject=Error for request: <Request ID>" target="_top">send us an email</a>
+and include the request id in your message.
 
 ### Time Formatting
 
