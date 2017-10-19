@@ -3,10 +3,12 @@ HOST: https://api.swarms.tech
 
 # SWARMS API
 
-The SWARMS API is built around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
-API requests and responses are formatted in JSON. We use common HTTP methods for the requests on our API.
-Requests to perform actions, e.g. like activating a campaign, will use `POST`. HTTP requests will be redirected to HTTPS. You will need
-to authenticate in order to use the API.
+Our API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
+It has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. 
+We use built-in HTTP features, like HTTP authentication and HTTP verbs. We support cross-origin 
+resource sharing, allowing you to interact securely with our API from a client-side application.
+All API responses will return JSON, including errors.
+
 
 ### Authentication
 You will need to have credentials in order to authenticate and recieve an auth token which you need to send in your requests.
