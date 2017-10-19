@@ -1,4 +1,4 @@
-FORMAT: 1A
+AuthentFORMAT: 1A
 HOST: https://api.swarms.tech
 
 # SWARMS API
@@ -11,12 +11,13 @@ All API responses will return JSON, including errors.
 
 
 ### Authentication
-You will need to have credentials in order to authenticate and recieve an auth token which you need to send in your requests.
-At the moment, you need to contact us at `info@swarms.tech` in order to receive credentials for our platform which
-you can use to authenticate. A signup endpoint will come soon.
 
-You authenticate by including your auth token in the `X-Auth` Header of the requests. You can request and discard your token with your credentials using the
-endpoints documented in the [Auth Token section](/reference/0/auth-token).
+You authenticate by including an API token in the `X-Auth-Token` header of the requests. You
+can request and discard the token with your credentials using the endpoints documented in
+the [Auth Token section](/reference/auth-token).
+
+As we are currently in a beta phase, you cannot signup on your own to our platform. If you want to
+create your account, please send us an email to <a href="mailto:info@swarms.tech?Subject=Signup as JobProvider" target="_top">info@swarms.tech</a>.
 
 
 ### Errors
