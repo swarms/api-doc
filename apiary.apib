@@ -941,6 +941,8 @@ and whether the audio should be played. The worker can pause and replay the vide
 ## RESPONSETask (object)
 
 + include REQUESTTask
++ resourcesSize (string)
++ estimatedUploadSize (string)
 + Include DefaultAttributes
 
 ## REQUESTJob (object)
@@ -959,14 +961,14 @@ and whether the audio should be played. The worker can pause and replay the vide
 + description: You will see 20 models images which you should rate on a 1 to 5 scale. (string, optional) - description for jobs in this campaign on the job market
 + terms: Don't tell anyone about this. (string, optional) - title for jobs in this campaign on the job market
 + estDuration: 10 sec (string) - estimated duration for jobs in this campaign
-+ workerPayment: 0.01 (number) - payment (in USD) for workers who work on jobs in this campaign
++ workerPayment: 0.01 (number) - payment (in USD) for workers who work on jobs in this campaign.
 + results: 3 (number) - number of results that should be generated for each job of the campaign
 + maxResultsPerWorker: 1 (number) - number of times a single worker can work on each job of the campaign
 + workerGroup: 1 (number, optional) - id of a workergroup to specify the workers that can work on jobs in this campaign
 + maxWorkTime: 10 min (string, optional) - time a worker has to work on a job of this campaign
 + maxUploadTime: 4 hours (string, optional) -  time a worker has to uplaod the results after finishing his work
 + maxReviewTime: 3 hours - (string, optional) - timeframe in which results can be (soft-) rejected before they get auto approved
-
++ training: false (boolean, optional) - if this campaign is a training for future jobs.
 
 ## RESPONSECampaign (object)
 
