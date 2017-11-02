@@ -194,6 +194,23 @@ available components check out the [Components Overview](reference/components-ov
             X-Auth-Token: token
 
 + Response 200 (application/json)
+
+### Copy a Task [POST /tasks/{id}/copy]
+
++ Parameter
+
+    + id (number) - id of the task that should be copied
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSETask)
     
     
 ## Group Job
@@ -289,6 +306,25 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
             X-Auth-Token: token
 
 + Response 200 (application/json)
+
+### Copy a Job [POST /jobs/{id}/copy{?deep}]
+
++ Parameters
+
+    + id (number) - id of the job that should be copied
+    
+    + deep: false (boolean) - if `true`, included tasks will also be copied and linked to the job. If `false`, existing tasks for the orginial job will be linked to the new one.
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSEJob)
 
 # Tasks of a Job [/jobs/{id}/tasks]
 
@@ -404,6 +440,25 @@ a campaign first and publish this campaign to our Job Market.
             X-Auth-Token: token
 
 + Response 200 (application/json)
+
+### Copy a Campaign [POST /campaigns/{id}/copy{?deep}]
+
++ Parameters
+
+    + id (number) - id of the campaign that should be copied
+    
+    + deep: false (boolean) - if `true`, included jobs _and_ tasks will also be copied and linked to the campaign. If `false`, existing jobs and tasks for the orginial campaign will be linked to the new one.
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSECampaign)
 
 # Jobs of a Campaign [/campaigns/{id}/jobs]
 
