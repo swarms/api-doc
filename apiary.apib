@@ -973,6 +973,12 @@ and whether the audio should be played. The worker can pause and replay the vide
 ## RESPONSECampaign (object)
 
 + Include REQUESTCampaign
++ state (enum)
+    + unpublished - The campaign has not been published yet
+    + active - Jobs of this campaign are currently on our Job market
+    + paused - The campaigns is currently paused, Workers cannot work on jobs
+    + cancelled - The campaign has been cancelled
+    + finished - The campaign is finished, all requested results have been generated
 + Include DefaultAttributes
 
 ## RESPONSETaskResult (object)
