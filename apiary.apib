@@ -97,6 +97,40 @@ header of your requests. You can can requests an auth token with your credential
 
 + Response 200 (application/json)
 
+## Group Profile
+
+## The Profile object [/me]
+
++ Attributes (RESPONSEProfile)
+
+### Get your Profile [GET /me]
+
++ Request
+
+    + Headers
+        
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSEProfile)
+    
+
+### Update your Profile [PUT /me]
+
++ Request (application/json)
+
+    + Attributes (REQUESTProfile)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSEProfile)
 
 ## Group Task
 
@@ -143,6 +177,23 @@ available components check out the [Components Overview](reference/components-ov
 + Response 200 (application/json)
 
     + Attributes (RESPONSETaskList)
+    
+### Get a single Task [GET /tasks/{id}]
+
++ Parameter
+
+    + id (number) - id of the task
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSETask)
 
 ### Create a Task [POST]
 
@@ -255,6 +306,23 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 + Response 200 (application/json)
 
     + Attributes (RESPONSEJobList)
+    
+### Get a single Job [GET /jobs/{id}]
+
++ Parameter
+
+    + id (number) - id of the job
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSEJob)
 
 ### Create a Job [POST]
 
@@ -409,6 +477,24 @@ a campaign first and publish this campaign to our Job Market.
 + Response 200 (application/json)
 
     + Attributes (RESPONSECampaignList)
+    
+
+### Get a single Campaign [GET /campaigns/{id}]
+
++ Parameter
+
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSECampaign)
 
 ### Create a Campaign [POST]
 
@@ -1120,3 +1206,26 @@ and whether the audio should be played. The worker can pause and replay the vide
 
 + reason (string, required) - a reason for the rejection that is displayed to the worker
 + until (string, required) - timestamp until when the worker can redo the job
+
+## JobProviderBalance (object)
+
++ available (string) - money available for new campaigns
++ frozen (string) - money currently frozen for active campaigns
+
+## REQUESTProfile (object)
+
++ firstName (string)
++ lastName (string)
++ phone (string)
++ organization (string) - name of your organization
++ website (string) - your organization's website
+
+## RESPONSEProfile (object)
+
++ Include REQUESTProfile
++ id (number)
++ customerId (string)
++ balance (JobProviderBalance)
++ email (string)
++ logo (string) - URL of your logo
++ commissionRate (number) - commission rate you pay for our platform usage on worker payments
