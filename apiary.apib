@@ -713,6 +713,40 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Response 200 (application/json)
 
     + Attributes (array[RESPONSEJobResult])
+    
+### List all Results for a Campaign grouped by Workers [GET /campaigns/{id}/results/grouped-by-worker]
+
++ Parameter
+
+    + id (number) - id of the result
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSEResultByWorker)  
+    
+### List all Results for a Campaign grouped by Tasks [GET /campaigns/{id}/results/grouped-by-task]
+
++ Parameter
+
+    + id (number) - id of the result
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSEResultsByTask)  
 
 ### Approve a Result [POST /results/{id}/approve]
 
@@ -1085,7 +1119,7 @@ and whether the audio should be played. The worker can pause and replay the vide
     + InReview
     + Approved
     + Rejected
-+ componentResults (array[RESPONSETaskResult])
++ taskResults (array[RESPONSETaskResult])
 + id (number)
 
 ## ComponentData
@@ -1229,3 +1263,33 @@ and whether the audio should be played. The worker can pause and replay the vide
 + email (string)
 + logo (string) - URL of your logo
 + commissionRate (number) - commission rate you pay for our platform usage on worker payments
+
+## ResultsByWorker (object)
+
++ worker (number)
++ jobResults (RESPONSEJobResult)
+
+## RESPONSEResultByWorker (object)
+
++ _links (PaginationLinks)
++ jobResultsByWorker (array[ResultsByWorker])
+
+## SingleResultByTask (object)
+
++ jobResultId (number)
++ worker (number)
++ job (number)
++ task (number)
++ startedAt (string)
++ completedAt (string)
++ componentResults (array[RESPONSEComponentResult])
+
+## ResultsByTask (object)
+
++ task (number)
++ jobResults (array[SingleResultByTask])
+
+## RESPONSEResultsByTask (object)
+
++ _links (PaginationLinks)
++ jobResultsByTask (array[ResultsByTask])
