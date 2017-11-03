@@ -695,7 +695,7 @@ The Worker will only get paid at the moment his Results get `approved`.
 
 ## The result object [/results]
 
-+ Attributes (RESPONSEJobResult)
++ Attributes (JobResult)
 
 ### List all Results for a Campaign [GET /campaigns/{id}/results]
 
@@ -712,7 +712,7 @@ The Worker will only get paid at the moment his Results get `approved`.
 
 + Response 200 (application/json)
 
-    + Attributes (array[RESPONSEJobResult])
+    + Attributes (RESPONSEJobResult)
     
 ### List all Results for a Campaign grouped by Workers [GET /campaigns/{id}/results/grouped-by-worker]
 
@@ -1111,6 +1111,11 @@ and whether the audio should be played. The worker can pause and replay the vide
 
 ## RESPONSEJobResult (object)
 
++ _links (PaginationLinks)
++ jobResults (array[JobResult])
+
+## JobResult (object)
+
 + worker (number)
 + job (number)
 + startedAt (string)
@@ -1267,7 +1272,7 @@ and whether the audio should be played. The worker can pause and replay the vide
 ## ResultsByWorker (object)
 
 + worker (number)
-+ jobResults (array[RESPONSEJobResult])
++ jobResults (array[JobResult])
 
 ## RESPONSEResultByWorker (object)
 
