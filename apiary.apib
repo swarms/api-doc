@@ -143,7 +143,7 @@ available components check out the [Components Overview](reference/components-ov
 
 + Attributes (RESPONSETask)
 
-### List all Tasks [GET /tasks{?order}{?limit}{?search}{?before}{?after}]
+### List all Tasks [GET /tasks{?order}{?limit}{?search}]
 
 + Parameters
 
@@ -162,10 +162,6 @@ available components check out the [Components Overview](reference/components-ov
     + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
     
     + search (string, optional) - search for full word matches
-    
-    + before (number, optional) - fetch only elements before the one with this `id`
-    
-    + after (number, optional) - fetch only elements after the one with this `id`
 
 + Request
 
@@ -272,7 +268,7 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 
 + Attributes (RESPONSEJob)
 
-### List all Jobs [GET /jobs{?order}{?limit}{?search}{?before}{?after}]
+### List all Jobs [GET /jobs{?order}{?limit}{?search}]
 
 + Parameters
 
@@ -291,10 +287,6 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
     + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
     
     + search (string, optional) - search for full word matches
-    
-    + before (number, optional) - fetch only elements before the one with this `id`
-    
-    + after (number, optional) - fetch only elements after the one with this `id`
 
 + Request
 
@@ -462,10 +454,6 @@ a campaign first and publish this campaign to our Job Market.
     + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
     
     + search (string, optional) - search for full word matches
-    
-    + before (number, optional) - fetch only elements before the one with this `id`
-    
-    + after (number, optional) - fetch only elements after the one with this `id`
 
 + Request
 
@@ -697,11 +685,12 @@ The Worker will only get paid at the moment his Results get `approved`.
 
 + Attributes (JobResult)
 
-### List all Results for a Campaign [GET /campaigns/{id}/results]
+### List all Results for a Campaign [GET /campaigns/{id}/results{?limit}]
 
 + Parameter
 
     + id (number) - id of the result
+    + limit (number, optional) - the number of elements being fetched. Default is 10.
 
 + Request (application/json)
 
@@ -714,11 +703,12 @@ The Worker will only get paid at the moment his Results get `approved`.
 
     + Attributes (RESPONSEJobResult)
     
-### List all Results for a Campaign grouped by Workers [GET /campaigns/{id}/results/grouped-by-worker]
+### List all Results for a Campaign grouped by Workers [GET /campaigns/{id}/results/grouped-by-worker{?limit}]
 
 + Parameter
 
     + id (number) - id of the result
+    + limit (number, optional) - the number of elements being fetched. Default is 10.
 
 + Request (application/json)
 
@@ -731,11 +721,12 @@ The Worker will only get paid at the moment his Results get `approved`.
 
     + Attributes (RESPONSEResultByWorker)  
     
-### List all Results for a Campaign grouped by Tasks [GET /campaigns/{id}/results/grouped-by-task]
+### List all Results for a Campaign grouped by Tasks [GET /campaigns/{id}/results/grouped-by-task{?limit}]
 
 + Parameter
 
     + id (number) - id of the result
+    + limit (number, optional) - the number of elements being fetched. Default is 10.
 
 + Request (application/json)
 
