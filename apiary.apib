@@ -1111,10 +1111,10 @@ and whether the audio should be played. The worker can pause and replay the vide
 + Include DefaultAttributes
 
 ## RESPONSETaskResult (object)
-+ task (number)
++ task (SingleTask)
 + startedAt (string)
 + completedAt (string)
-+ componentResults (array[RESPONSEComponentResult])
++ components (array[SingleComponent])
 
 ## RESPONSEJobResult (object)
 
@@ -1290,6 +1290,11 @@ and whether the audio should be played. The worker can pause and replay the vide
 
 + id (number)
 + name (string)
+
+## SingleComponent (object)
+
++ data (RESPONSEComponent)
++ result (ComponentResultData)
 
 ## SingleComponentByTask (object)
 
