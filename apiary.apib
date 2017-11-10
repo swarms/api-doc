@@ -1286,20 +1286,29 @@ and whether the audio should be played. The worker can pause and replay the vide
 + _links (PaginationLinks)
 + jobResultsByWorker (array[ResultsByWorker])
 
-## SingleResultByTask (object)
+## SingleTask (object)
+
++ id (number)
++ name (string)
+
+## SingleComponentByTask (object)
+
++ data (RESPONSEComponent)
++ results (array[SingleComponentResultByTask])
+
+## SingleComponentResultByTask (object)
 
 + jobResult (number)
 + worker (number)
 + job (number)
-+ task (number)
 + startedAt (string)
 + completedAt (string)
-+ componentResults (array[RESPONSEComponentResult])
++ result (array[ComponentResultData])
 
 ## ResultsByTask (object)
 
-+ task (number)
-+ taskResults (array[SingleResultByTask])
++ task (SingleTask)
++ components (array[SingleComponentByTask])
 
 ## RESPONSEResultsByTask (object)
 
