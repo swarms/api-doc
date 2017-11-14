@@ -499,7 +499,25 @@ a campaign first and publish this campaign to our Job Market.
 
     + Attributes (RESPONSECampaign)
     
-    
+### Update a Campaign [PUT /campaigns/{id}]
+
++ Parameter
+
+    + id (number) - id of the campaign
+
++ Request (application/json)
+
+    + Attributes (REQUESTCampaign)
+
+    + Headers
+
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSECampaign)
+
 ### Delete a Campaign [DELETE /camapigns/{id}]
 
 + Parameter
