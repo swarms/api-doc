@@ -822,13 +822,15 @@ Here you can see the all currently supported components that you can use to buil
 The components will be displayed below each other in the Task.
 
 **Interactive Components**
-* AdvancedImageMarker
+* AdvancedImageMarker (_deprecated_. See ImageMarker)
 * BinaryChoice
 * Rating
-* SimpleImageMarker
+* SimpleImageMarker (_deprecated_. See ImageMarker)
+* ImageMarger
 * TextInput
 * Toggle
 * VideoRecording
+* Stepper
 
 **Non-Interactive Components**
 * Image
@@ -1021,7 +1023,31 @@ A `Toggle` can be used to ask for a simple `true`/`false` on a label. It can be 
 |:-------|---------|---------------------------|
 | `url`  | string  | url of the recorded video |
 
+## Stepper
 
+A `Stepper` component displays an input value that the worker can change using up and down arrows. 
+Each arrow press changes the value by the `step` property, and it has a maximum and minimum value determined 
+by `max` and `min`, respectively. The starting point can be set by `start` property.
+
+
+### Example
+
+
+### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `step`      | number  | value change per arrow press |
+| `min`      | number  | minimum value for input      |
+| `max`      | number  | maximum value for input      |
+| `start`      | number  | start value for input      |
+
+
+### Result
+
+| name      | type    | description     |
+|:----------|---------|-----------------|
+| `result`  | number  | user input value          |
 
 # Non-interactive Components
 
