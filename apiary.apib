@@ -267,6 +267,42 @@ available components check out the [Components Overview](reference/components-ov
     + Attributes (RESPONSETask)
     
     
+### Archive a Task [POST /tasks/{id}/archive]
+
++ Parameter
+
+    + id (number) - id of the task that should be archived
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSETask)    
+    
+    
+### Unarchive a Task [POST /tasks/{id}/unarchive]
+
++ Parameter
+
+    + id (number) - id of the task that should be unarchived
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSETask)        
+    
+    
 ## Group Job
 
 A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
@@ -392,6 +428,44 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 + Response 201 (application/json)
 
     + Attributes (RESPONSEJob)
+    
+    
+### Archive a Job [POST /jobs/{id}/archive{?deep}]
+
++ Parameters
+
+    + id (number) - id of the job that should be archived
+    
+    + deep: false (boolean) - if `true`, included tasks will also be archived and linked to the job.
+
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSEJob)   
+    
+    
+### Unarchive a Job [POST /jobs/{id}/unarchive]
+
++ Parameters
+
+    + id (number) - id of the job that should be archived. Will also unarchive included tasks.
+   
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSEJob)       
 
 # Tasks of a Job [/jobs/{id}/tasks]
 
@@ -558,6 +632,45 @@ a campaign first and publish this campaign to our Job Market.
 + Response 201 (application/json)
 
     + Attributes (RESPONSECampaign)
+    
+    
+### Archive a Campaign [POST /campaigns/{id}/archive{?deep}]
+
++ Parameters
+
+    + id (number) - id of the campaign that should be archived
+    
+    + deep: false (boolean) - if `true`, included jobs _and_ tasks will also be archived and linked to the campaign.
+    
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSECampaign)   
+    
+    
+### Unarchive a Campaign [POST /campaigns/{id}/unarchive]
+
++ Parameters
+
+    + id (number) - id of the campaign that should be archived. Will also unarchive included jobs and tasks.
+ 
++ Request (application/json)
+
+    + Headers
+    
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 201 (application/json)
+
+    + Attributes (RESPONSECampaign)   
+    
 
 # Jobs of a Campaign [/campaigns/{id}/jobs]
 
@@ -1088,6 +1201,7 @@ and whether the audio should be played. The worker can pause and replay the vide
 + readOnly: false (boolean) - indicates whether the resource can be modified
 + lastModifiedAt: `2017-08-02T13:58:24` (string) - the datetime of the last modification of the resource.
 + createdAt: `2017-08-02T13:58:24` (string) - the datetime of the creation of the resource.
++ archived: false (boolean) - if the resource is archived.
 + properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional).
 
 ## REQUESTTask (object)
