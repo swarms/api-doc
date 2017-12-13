@@ -822,15 +822,13 @@ Here you can see the all currently supported components that you can use to buil
 The components will be displayed below each other in the Task.
 
 **Interactive Components**
-* AdvancedImageMarker (_deprecated_. See ImageMarker)
+* AdvancedImageMarker
 * BinaryChoice
 * Rating
-* SimpleImageMarker (_deprecated_. See ImageMarker)
-* ImageMarger
+* SimpleImageMarker
 * TextInput
 * Toggle
 * VideoRecording
-* Stepper
 
 **Non-Interactive Components**
 * Image
@@ -1023,31 +1021,7 @@ A `Toggle` can be used to ask for a simple `true`/`false` on a label. It can be 
 |:-------|---------|---------------------------|
 | `url`  | string  | url of the recorded video |
 
-## Stepper
 
-A `Stepper` component displays an input value that the worker can change using up and down arrows. 
-Each arrow press changes the value by the `step` property, and it has a maximum and minimum value determined 
-by `max` and `min`, respectively. The starting point can be set by `start` property.
-
-
-### Example
-
-
-### Attributes
-
-| name       | type    | description                  |
-|:-----------|---------|------------------------------|
-| `step`      | number  | value change per arrow press |
-| `min`      | number  | minimum value for input      |
-| `max`      | number  | maximum value for input      |
-| `start`      | number  | start value for input      |
-
-
-### Result
-
-| name      | type    | description     |
-|:----------|---------|-----------------|
-| `result`  | number  | user input value          |
 
 # Non-interactive Components
 
@@ -1114,13 +1088,13 @@ and whether the audio should be played. The worker can pause and replay the vide
 + readOnly: false (boolean) - indicates whether the resource can be modified
 + lastModifiedAt: `2017-08-02T13:58:24` (string) - the datetime of the last modification of the resource.
 + createdAt: `2017-08-02T13:58:24` (string) - the datetime of the creation of the resource.
-+ properties(Properties) - a json object containing a set of custom key/value pairs.
++ properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional).
 
 ## REQUESTTask (object)
 
 + name: My first Task (string) - name of the task
 + components (array[REQUESTComponent]) - components of the task
-+ properties(Properties) - a json object containing a set of custom key/value pairs.
++ properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional).
 
 ## RESPONSETask (object)
 
@@ -1132,7 +1106,7 @@ and whether the audio should be played. The worker can pause and replay the vide
 ## REQUESTJob (object)
 
 + name: My first Job (string) - name of the job
-+ properties(Properties) - a json object containing a set of custom key/value pairs.
++ properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional).
 
 ## RESPONSEJob (object)
 
@@ -1150,13 +1124,13 @@ and whether the audio should be played. The worker can pause and replay the vide
 + estDuration: 10 sec (string) - estimated duration for jobs in this campaign
 + workerPayment: 0.01 (number) - payment (in USD) for workers who work on jobs in this campaign.
 + results: 3 (number) - number of results that should be generated for each job of the campaign
-+ maxResultsPerWorker: 1 (number) - number of times a single worker can work on each job of the campaign
-+ workerGroup: 1 (number, optional) - id of a workergroup to specify the workers that can work on jobs in this campaign
-+ maxWorkTime: 10 min (string, optional) - time a worker has to work on a job of this campaign
-+ maxUploadTime: 4 hours (string, optional) -  time a worker has to uplaod the results after finishing his work
-+ maxReviewTime: 3 hours - (string, optional) - timeframe in which results can be (soft-) rejected before they get auto approved
-+ training: false (boolean, optional) - if this campaign is a training for future jobs.
-+ properties(Properties) - a json object containing a set of custom key/value pairs.
++ maxResultsPerWorker: 1 (number, optional) - number of times a single worker can work on each job of the campaign (optional).
++ workerGroup: 1 (number, optional) - id of a workergroup to specify the workers that can work on jobs in this campaign (optional)
++ maxWorkTime: 10 min (string, optional) - time a worker has to work on a job of this campaign (optional)
++ maxUploadTime: 4 hours (string, optional) -  time a worker has to uplaod the results after finishing his work (optional)
++ maxReviewTime: 3 hours - (string, optional) - timeframe in which results can be (soft-) rejected before they get auto approved (optional)
++ training: false (boolean, optional) - if this campaign is a training for future jobs (optional).
++ properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional)ark .
 
 ## RESPONSECampaign (object)
 
@@ -1241,7 +1215,7 @@ and whether the audio should be played. The worker can pause and replay the vide
     
 + sticky (boolean, optional) - whether the component should stick at the top of the screen on scrolling. Defaults to `false`
 + Include ComponentData
-+ properties(Properties) - a json object containing a set of custom key/value pairs.
++ properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional).
 
 ## RESPONSEComponent (REQUESTComponent)
 
