@@ -4,8 +4,8 @@ HOST: https://api.swarms.tech
 # SWARMS API
 
 Our API is organized around [REST](https://en.wikipedia.org/wiki/Representational_state_transfer).
-It has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. 
-HTTP requests will be forwared to HTTPS. We support cross-origin 
+It has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors.
+HTTP requests will be forwarded to HTTPS. We support cross-origin
 resource sharing, allowing you to interact securely with our API from a client-side application.
 All API responses, including errors, will return JSON by default.
 
@@ -30,7 +30,7 @@ create your account, please send us an email to <a href="mailto:info@swarms.tech
 ### Errors
 
 For errors the common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used.
-The body of the reponse will contain an error `code` and a `message` as well as a user friendly `description` like:
+The body of the response will contain an error `code` and a `message` as well as a user friendly `description` like:
 
 ```
 {
@@ -41,13 +41,13 @@ The body of the reponse will contain an error `code` and a `message` as well as 
 ```
 
 Each response will contain a `X-Request-ID` header with an UUID identifying that request. In case you encounter
-weird behaviour, please <a href="mailto:info@swarms.tech?Subject=Error for request: <Request ID>" target="_top">send us an email</a>
+weird behavior, please <a href="mailto:info@swarms.tech?Subject=Error for request: <Request ID>" target="_top">send us an email</a>
 and include the request id in your message.
 
 
 ### Versioning
 
-Our API is versioned in a `major.minor` format. You can specify the version to use by setting the 
+Our API is versioned in a `major.minor` format. You can specify the version to use by setting the
 `X-API-Version` header in the requests. If this header is not present, it will default to the latest
 version. The response will also include the used API version in the `X-API-Version` header.
 The current API version is `1.0`.
@@ -56,13 +56,13 @@ The current API version is `1.0`.
 ### Time Formatting
 
 Timestamps are returned in [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) timezone and formatted
-accoring to the `ISO-8601` standard, as in `2017-08-02T13:58:24`.
+according to the `ISO-8601` standard, as in `2017-08-02T13:58:24`.
 
 
 ### Feedback
 
 Our API docs are [hosted on GitHub](https://github.com/swarms/api-doc). We appreciate your
-feedback in issues in the repository or via email at <a href="mailto:info@swarms.tech?Subject=API Feedback" target="_top">info@swarms.tech</a>. 
+feedback in issues in the repository or via email at <a href="mailto:info@swarms.tech?Subject=API Feedback" target="_top">info@swarms.tech</a>.
 
 
 ## Group Auth Token
@@ -77,7 +77,7 @@ header of your requests. You can can requests an auth token with your credential
     + Headers
 
             X-API-Version: 1.0
-        
+
     + Body
 
             {
@@ -98,7 +98,7 @@ header of your requests. You can can requests an auth token with your credential
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -115,14 +115,14 @@ header of your requests. You can can requests an auth token with your credential
 + Request
 
     + Headers
-        
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 200 (application/json)
 
     + Attributes (RESPONSEProfile)
-    
+
 
 ### Update your Profile [PUT /me]
 
@@ -131,7 +131,7 @@ header of your requests. You can can requests an auth token with your credential
     + Attributes (REQUESTProfile)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -155,32 +155,32 @@ available components check out the [Components Overview](reference/components-ov
 + Parameters
 
     + order (array[string], optional)
-        
+
         + Members
-            
+
             + id
-            
+
             + name
-            
+
             + lastModifiedAt
-            
+
             + createdAt
 
     + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
-    
+
     + search (string, optional) - search for full word matches
 
 + Request
 
     + Headers
-        
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 200 (application/json)
 
     + Attributes (RESPONSETaskList)
-    
+
 ### Get a single Task [GET /tasks/{id}]
 
 + Parameter
@@ -190,7 +190,7 @@ available components check out the [Components Overview](reference/components-ov
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -205,15 +205,15 @@ available components check out the [Components Overview](reference/components-ov
     + Attributes (REQUESTTask)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSETask)
-   
-   
+
+
 ### Update a Task [PUT /tasks/{id}]
 
 + Parameter
@@ -225,15 +225,15 @@ available components check out the [Components Overview](reference/components-ov
     + Attributes (REQUESTTask)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 200 (application/json)
 
     + Attributes (RESPONSETask)
-    
-    
+
+
 ### Delete a Task [DELETE /tasks/{id}]
 
 + Parameter
@@ -243,7 +243,7 @@ available components check out the [Components Overview](reference/components-ov
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -258,15 +258,15 @@ available components check out the [Components Overview](reference/components-ov
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSETask)
-    
-    
+
+
 ### Archive a Task [POST /tasks/{id}/archive]
 
 + Parameter
@@ -276,15 +276,15 @@ available components check out the [Components Overview](reference/components-ov
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSETask)    
-    
-    
+
+
 ### Unarchive a Task [POST /tasks/{id}/unarchive]
 
 + Parameter
@@ -294,15 +294,15 @@ available components check out the [Components Overview](reference/components-ov
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSETask)        
-    
-    
+
+
 ## Group Job
 
 A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
@@ -316,32 +316,32 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 + Parameters
 
     + order (array[string], optional)
-        
+
         + Members
-            
+
             + id
-            
+
             + name
-            
+
             + lastModifiedAt
-            
+
             + createdAt
 
     + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
-    
+
     + search (string, optional) - search for full word matches
 
 + Request
 
     + Headers
-        
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 200 (application/json)
 
     + Attributes (RESPONSEJobList)
-    
+
 ### Get a single Job [GET /jobs/{id}]
 
 + Parameter
@@ -351,7 +351,7 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -366,15 +366,15 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
     + Attributes (REQUESTJob)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSEJob)
-   
-   
+
+
 ### Update a Job [PUT /jobs/{id}]
 
 + Parameter
@@ -386,15 +386,15 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
     + Attributes (REQUESTJob)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 200 (application/json)
 
     + Attributes (RESPONSEJob)
-    
-    
+
+
 ### Delete a Job [DELETE /jobs/{id}]
 
 + Parameter
@@ -404,7 +404,7 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -415,51 +415,51 @@ A `Job` is the unit of work a worker gets paid for. It is a sequence of `Tasks`.
 + Parameters
 
     + id (number) - id of the job that should be copied
-    
+
     + deep: false (boolean) - if `true`, included tasks will also be copied and linked to the job. If `false`, existing tasks for the orginial job will be linked to the new one.
 
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSEJob)
-    
-    
+
+
 ### Archive a Job [POST /jobs/{id}/archive{?deep}]
 
 + Parameters
 
     + id (number) - id of the job that should be archived
-    
+
     + deep: false (boolean) - if `true`, included tasks will also be archived and linked to the job.
 
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSEJob)   
-    
-    
+
+
 ### Unarchive a Job [POST /jobs/{id}/unarchive]
 
 + Parameters
 
     + id (number) - id of the job that should be archived. Will also unarchive included tasks.
-   
+
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -480,7 +480,7 @@ You can add, update and get the tasks of a job.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -500,7 +500,7 @@ You can add, update and get the tasks of a job.
     + Attributes (array[number])
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -509,7 +509,7 @@ You can add, update and get the tasks of a job.
 ## Group Campaign
 
 A `Campaign` is a collection of `Jobs`. It defines under which conditions its jobs are published
-to our job market. If you want to make a `Job` available to the workers, you first need to add it to 
+to our job market. If you want to make a `Job` available to the workers, you first need to add it to
 a campaign first and publish this campaign to our Job Market.
 
 ## The campaign object [/campaigns]
@@ -521,32 +521,32 @@ a campaign first and publish this campaign to our Job Market.
 + Parameters
 
     + order (array[string], optional)
-        
+
         + Members
-            
+
             + id
-            
+
             + name
-            
+
             + lastModifiedAt
-            
+
             + createdAt
 
     + limit (number, optional) - the number of elements being fetched. Limit can range between 1 and 100 elements. Default is 10.
-    
+
     + search (string, optional) - search for full word matches
 
 + Request
 
     + Headers
-        
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 200 (application/json)
 
     + Attributes (RESPONSECampaignList)
-    
+
 
 ### Get a single Campaign [GET /campaigns/{id}]
 
@@ -557,7 +557,7 @@ a campaign first and publish this campaign to our Job Market.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -572,14 +572,14 @@ a campaign first and publish this campaign to our Job Market.
     + Attributes (REQUESTCampaign)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSECampaign)
-    
+
 ### Update a Campaign [PUT /campaigns/{id}]
 
 + Parameter
@@ -608,7 +608,7 @@ a campaign first and publish this campaign to our Job Market.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -619,58 +619,58 @@ a campaign first and publish this campaign to our Job Market.
 + Parameters
 
     + id (number) - id of the campaign that should be copied
-    
+
     + deep: false (boolean) - if `true`, included jobs _and_ tasks will also be copied and linked to the campaign. If `false`, existing jobs and tasks for the orginial campaign will be linked to the new one.
 
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSECampaign)
-    
-    
+
+
 ### Archive a Campaign [POST /campaigns/{id}/archive{?deep}]
 
 + Parameters
 
     + id (number) - id of the campaign that should be archived
-    
+
     + deep: false (boolean) - if `true`, included jobs _and_ tasks will also be archived and linked to the campaign.
-    
+
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSECampaign)   
-    
-    
+
+
 ### Unarchive a Campaign [POST /campaigns/{id}/unarchive]
 
 + Parameters
 
     + id (number) - id of the campaign that should be archived. Will also unarchive included jobs and tasks.
- 
+
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 201 (application/json)
 
     + Attributes (RESPONSECampaign)   
-    
+
 
 # Jobs of a Campaign [/campaigns/{id}/jobs]
 
@@ -685,7 +685,7 @@ You can add, update and get the jobs of a campaign.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -704,7 +704,7 @@ You can add, update and get the jobs of a campaign.
     + Attributes (array[number])
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -721,7 +721,7 @@ You can add, update and get the jobs of a campaign.
     + Attributes (array[number])
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -733,7 +733,7 @@ The `Campaign`s state manages the availability of it's jobs on our Job Market.
 
 Initially, a `Campaign` is unpublished. After you added Jobs to it, you can `publish` it to our
 Job Market which will set its state to `active`. When the `Campaign` is active, it's Jobs are
-available on our Job Market and workers can work on them. 
+available on our Job Market and workers can work on them.
 You can `pause` an active Campaign and `continue` it afterwards. When all results for
 a Campaign  have been generated, the Campaign's state is set to `finished`.
 
@@ -752,7 +752,7 @@ This lifecycle is also shown in the below drawing.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -767,7 +767,7 @@ This lifecycle is also shown in the below drawing.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -782,7 +782,7 @@ This lifecycle is also shown in the below drawing.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -797,7 +797,7 @@ This lifecycle is also shown in the below drawing.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -833,14 +833,14 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 200 (application/json)
 
     + Attributes (RESPONSEJobResult)
-    
+
 ### List all Results for a Campaign grouped by Workers [GET /campaigns/{id}/results/grouped-by-worker{?limit}]
 
 + Parameter
@@ -851,14 +851,14 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
 + Response 200 (application/json)
 
     + Attributes (RESPONSEResultByWorker)  
-    
+
 ### List all Results for a Campaign grouped by Tasks [GET /campaigns/{id}/results/grouped-by-task{?limit}]
 
 + Parameter
@@ -869,7 +869,7 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
 
@@ -886,10 +886,10 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
-            
+
     + Attributes (REQUESTApprove)
 
 + Response 200 (application/json)
@@ -903,10 +903,10 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
-        
+
     + Attributes (REQUESTReject)
 
 + Response 200 (application/json)
@@ -920,31 +920,34 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Request (application/json)
 
     + Headers
-    
+
             X-API-Version: 1.0
             X-Auth-Token: token
-            
+
     + Attributes (REQUESTSoftReject)
 
 + Response 200 (application/json)
 
-    
+
 # Group Components Overview
 
 Here you can see the all currently supported components that you can use to build your Tasks.
 The components will be displayed below each other in the Task.
 
 **Interactive Components**
-* AdvancedImageMarker
+* AudioRecording
 * BinaryChoice
+* BinaryImageChoice
+* ImageMarker
 * Rating
-* SimpleImageMarker
 * TextInput
 * Toggle
 * VideoRecording
 
 **Non-Interactive Components**
+* Audio
 * Image
+* Text
 * Video
 
 # Interactive Components
@@ -954,23 +957,101 @@ can be fetched afterwards.
 
 
 
-## AdvancedImageMarker
 
-The `AdvancedImageMarker` let's the worker draw on an image. For that, he has a shifted marker
-so that he does not draw with his fingertip directly and can better see what he's drawing. He
-can adjust the size of that marker and also use it as an eraser. Rotating the phone will enable
-a landscape mode. This version of the ImageMarker will allow the worker to draw more precisely
-than with the `SimpleImageMarker` which in contrast is easier to use.
+## AudioRecording
+
+The `AudioRecording` let's the worker to record audio. The worker can record, play and rerecord the audio.
 
 ### Example
 
-![AdvancedImageMarker](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/AdvancedImageMarker.gif)
+![AudioRecording](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/AudioRecording.gif)
+
+### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `minDurationInSeconds`      | string  | minimum duration of the recording in seconds             |
+| `maxDurationInSeconds`      | boolean  | maximum duration of the recording in seconds             |
+
+### Result
+
+| name       | type    | description     |
+|:-----------|---------|-----------------|
+| `url`  | string | url of the audio (with `.aac` extension) |
+
+
+
+
+## BinaryChoice
+
+A `BinaryChoice` will display two labelled buttons to the worker. The worker can only select
+one of them.
+
+### Example
+
+![BinaryChoice](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/BinaryChoice.gif)
+
+### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `option1`  | string  | 1st option label      |
+| `option2`  | string  | 2nd option label   |
+
+### Result
+
+| name              | type    | description     |
+|:------------------|---------|-----------------|
+| `selectedOption`  | string  | selected option label |
+
+
+
+
+## BinaryImageChoice
+
+A `BinaryImageChoice` will display two labelled images to the worker. The worker can only select one of them.
+
+### Example
+
+![BinaryImageChoice](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/BinaryImageChoice.gif)
+
+### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `option1`  | object  | 1st Option Object      |
+| `option2`  | object  | 2nd Option Object   |
+
+
+##### Option Object
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `id`  | string  | option id      |
+| `url`  | string  | option image url      |
+| `label`  | string  | option label      |
+
+### Result
+
+| name              | type    | description     |
+|:------------------|---------|-----------------|
+| `selectedOption`  | string  | selected option id |
+
+
+
+
+## ImageMarker
+
+The `ImageMarker` let's the worker draw on an image using his finger. He can adjust the size, color and opacity of the drawing. Also erase the drawing, undo and redo his changes, zoom, and draw in landscape or portrait mode. The image is rendered without pixel smoothing, so that the worker can be very precise with his drawings.
+
+### Example
+
+![ImageMarker](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/ImageMarker.gif)
 
 This example uses the following input image and would generate the following result:
 
 | input      | result    |
 |:-----------|-----------|
-| ![a](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/ImageMarkerSampleImage.png)  | ![AdvancedImageMarkerResult](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/AdvancedImageMarkerResult.png)|
+| ![a](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/ImageMarkerSampleImage.png)  | ![ImageMarkerResult](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/ImageMarkerResult.png)|
 
 
 ### Attributes
@@ -983,32 +1064,8 @@ This example uses the following input image and would generate the following res
 
 | name   | type    | description                 |
 |:-------|---------|-----------------------------|
-| `url`  | string  | url of the drawing (as a `.png`) |
+| `url`  | string  | url of the drawing (with `.png` extension) |
 
-
-
-
-## BinaryCoice
-
-A `BinaryChoice` will display two labelled buttons to the worker. The worker can only select 
-one of them.
-
-### Example
-
-![BinaryChoice](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/BinaryChoice.gif)
-
-### Attributes
-
-| name       | type    | description                  |
-|:-----------|---------|------------------------------|
-| `option1`  | string  | label for first  button      |
-| `option2`  | string  | label for the other button   |
-
-### Result
-
-| name              | type    | description     |
-|:------------------|---------|-----------------|
-| `selectedOption`  | string  | selected Option |
 
 
 
@@ -1037,34 +1094,32 @@ You can define the number of stars and if the worker can also select half stars.
 
 
 
-## SimpleImageMarker
 
-The `SimpleImageMarker` let's the worker draw with his fingertap on an image directy. He can zoom,
-redo and undo his changes and also use the landscape mode for his drawings. This ImageMarker  will
-be more efficient than the `AdvancedImageMarker` when the accuracy of the drawing is less important to you.
+## Stepper
+
+A `Stepper` component requires the worker to select a number from a specified number range by tapping up and down arrows.
+You can define the minimum and maximum values of the range, a start value, and an value change step.
 
 ### Example
 
-![SimpleImageMarker](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/SimpleImageMarker.gif)
+![Stepper](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Stepper.gif)
 
-This example uses the following input image and would generate the following result:
 
-| input      | result |
-|:-----------|--------|
-| ![a](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/ImageMarkerSampleImage.png)  | ![SimpleImageMarkerResult](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/SimpleImageMarkerResult.png)|
-
- 
 ### Attributes
 
 | name       | type    | description                  |
 |:-----------|---------|------------------------------|
-| `url`      | string  | url of the image             |
+| `min`      | number  | minimum value of the range   |
+| `max`      | number  | maximum value of the range   |
+| `step`      | number  | value change step           |
+| `start`      | number  | number of stars            |
 
 ### Result
 
-| name   | type    | description                 |
-|:-------|---------|-----------------------------|
-| `url`  | string  | url of the drawing (as a `.png`) |
+| name      | type    | description     |
+|:----------|---------|-----------------|
+| `result`  | number  | selected number |
+
 
 
 
@@ -1075,7 +1130,7 @@ in the input field before the worker starts typing.
 
 ### Example
 
-![textInput](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/TextInput.gif)
+![TextInput](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/TextInput.gif)
 
 ### Attributes
 
@@ -1088,6 +1143,7 @@ in the input field before the worker starts typing.
 | name    | type    | description     |
 |:--------|---------|-----------------|
 | `text`  | string  | the worker's input |
+
 
 
 
@@ -1116,16 +1172,19 @@ A `Toggle` can be used to ask for a simple `true`/`false` on a label. It can be 
 
 
 
+
 ## VideoRecording
 
 ### Example
+
+![VideoRecording](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/VideoRecording.gif)
 
 ### Attributes
 
 | name                   | type    | description                          |
 |:-----------------------|---------|--------------------------------------|
 | `landscape`            | boolean | is the video wide and not tall?      |
-| `minDurationInSeconds` | number  | minumum video duration               |
+| `minDurationInSeconds` | number  | minimum video duration               |
 | `maxDurationInSeconds` | number  | maximum video duration               |
 
 ### Result
@@ -1136,13 +1195,35 @@ A `Toggle` can be used to ask for a simple `true`/`false` on a label. It can be 
 
 
 
+
 # Non-interactive Components
+
+## Audio
+
+An audio file which is playable in a simple audio player in the Task. You can set whether it should start or repeat automatically
+and whether the worker has to listen it fully at least once. The worker can pause and replay the audio.
+
+### Example
+
+![Audio](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Audio.gif)
+
+### Attributes
+
+| name       | type    | description                  |
+|:-----------|---------|------------------------------|
+| `url`      | string  | url of the audio             |
+| `autoplay` | boolean | whether the audio should start playing automatically |
+| `repeat`   | boolean | whether the audio should repeat automatically        |
+| `mustListen`    | boolean | whether the worker must listen the audio at least once                    |
+
+
+
 
 ## Image
 
 A simple image that is displayed in the Task.
 
-### Exmaple
+### Example
 
 ![Image](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Image.png)
 
@@ -1152,30 +1233,36 @@ A simple image that is displayed in the Task.
 |:-----------|---------|------------------------------|
 | `url`      | string  | url of the image             |
 
+
+
+
 ## Text
 
 A text that is displayed in the Task in a style of your choice
 
 ### Example
 
-![Image](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Text.png)
+![Text](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Text.png)
 
 ### Attributes
 
 | name       | type    | description                  |
 |:-----------|---------|------------------------------|
 | `text`     | string  | the text to display          |
-| `style`    | string  | the style of the text        | 
+| `style`    | string  | the style of the text        |
 
-The attribute `style` can be one of: 
+The attribute `style` can be one of:
 `"Question", "Instruction", "H1", "H2", "PlainText", "Html", "Quote"`
+
+
+
 
 ## Video
 
-A video that is displayed in the Task. You can set whehther it should start and repeat automatically
-and whether the audio should be played. The worker can pause and replay the video.
+A video which is playable in a simple video player in the Task. You can set it to play or repeat automatically, mute the sound, and define whether the worker has to watch it fully at least once. The worker can pause and replay the video.
 
 ### Example
+![Video](https://s3.eu-central-1.amazonaws.com/swarmsblobstorage/APIDocComponents/Video.gif)
 
 ### Attributes
 
@@ -1184,16 +1271,18 @@ and whether the audio should be played. The worker can pause and replay the vide
 | `url`      | string  | url of the video             |
 | `autoplay` | boolean | whether the video should start playing automatically |
 | `repeat`   | boolean | whether the video should repeat automatically        |
-| `audio`    | boolean | whther the audio should be played                    |
+| `mustWatch`    | boolean | whether the worker must watch the video at least once                    |
+| `playAudio`    | boolean | whether the audio should be played                    |
 
 
 
-            
+
+
 # Data Structures
 
 ## Properties (object)
 + key: key (string) - a custom key
-+ value: value (string) - a cutom value
++ value: value (string) - a custom value
 
 ## DefaultAttributes
 
@@ -1241,7 +1330,7 @@ and whether the audio should be played. The worker can pause and replay the vide
 + maxResultsPerWorker: 1 (number, optional) - number of times a single worker can work on each job of the campaign (optional).
 + workerGroup: 1 (number, optional) - id of a workergroup to specify the workers that can work on jobs in this campaign (optional)
 + maxWorkTime: 10 min (string, optional) - time a worker has to work on a job of this campaign (optional)
-+ maxUploadTime: 4 hours (string, optional) -  time a worker has to uplaod the results after finishing his work (optional)
++ maxUploadTime: 4 hours (string, optional) -  time a worker has to upload the results after finishing his work (optional)
 + maxReviewTime: 3 hours - (string, optional) - timeframe in which results can be (soft-) rejected before they get auto approved (optional)
 + training: false (boolean, optional) - if this campaign is a training for future jobs (optional).
 + properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional)ark .
@@ -1297,7 +1386,7 @@ and whether the audio should be played. The worker can pause and replay the vide
         + option2 (string)
     + Properties
         + steps (number)
-        + halfSetps (boolean)
+        + halfSteps (boolean)
     + Properties
         + min (number)
         + max (number)
@@ -1326,7 +1415,7 @@ and whether the audio should be played. The worker can pause and replay the vide
     + Toggle (string)
     + Video (string)
     + VideoRecording (string)
-    
+
 + sticky (boolean, optional) - whether the component should stick at the top of the screen on scrolling. Defaults to `false`
 + Include ComponentData
 + properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional).
@@ -1346,8 +1435,8 @@ and whether the audio should be played. The worker can pause and replay the vide
     + result (number)
     + text (string)
     + checked (boolean)
-    
-    
+
+
 ## REQUESTComponentResult (object)
 
 + type (enum) - depending on the type of the component
@@ -1359,7 +1448,7 @@ and whether the audio should be played. The worker can pause and replay the vide
     + TextInputResult (string)
     + ToggleResult (string)
     + VideoRecordingResult (string)
-    
+
 + Include ComponentResultData
 
 ## RESPONSEComponentResult (REQUESTComponentResult)
