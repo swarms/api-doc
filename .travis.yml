@@ -6,3 +6,4 @@ deploy:
   bucket: $AWS_BUCKET
   skip_cleanup: true
   region: $BUCKET_REGION
+  acl: public_read
