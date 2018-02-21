@@ -1,4 +1,10 @@
-language: generic
+language: node_js
+node_js:
+  - "node"
+before_install:
+  - npm i -g aglio
+script:
+  - aglio -i apiary.apib -o output.html
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_ID
