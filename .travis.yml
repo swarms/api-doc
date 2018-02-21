@@ -4,7 +4,7 @@ node_js:
 before_install:
   - npm i -g aglio
 script:
-  - aglio -i apiary.apib -o index.html
+  - aglio -i apiary.apib --theme-template triple -o index.html
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_ID
