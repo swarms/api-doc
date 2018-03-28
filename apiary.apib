@@ -1302,8 +1302,8 @@ A video which is playable in a simple video player in the Task. You can set it t
 ## RESPONSETask (object)
 
 + include REQUESTTask
-+ resourcesSize (string)
-+ estimatedUploadSize (string)
++ resourcesSize: 3MB (string) - size of the task including media files
++ estimatedUploadSize: 2MB (string) - estimated upload size of the results for this task for the worker
 + Include DefaultAttributes
 
 ## REQUESTJob (object)
@@ -1314,8 +1314,8 @@ A video which is playable in a simple video player in the Task. You can set it t
 ## RESPONSEJob (object)
 
 + Include REQUESTJob
-+ resourcesSize (string)
-+ estimatedUploadSize (string)
++ resourcesSize: 3MB (string) - size of the job including media files
++ estimatedUploadSize (string) - estimated upload size of the results for this job for the worker
 + Include DefaultAttributes
 
 ## REQUESTCampaign (object)
@@ -1327,13 +1327,13 @@ A video which is playable in a simple video player in the Task. You can set it t
 + estDuration: 10 sec (string) - estimated duration for jobs in this campaign
 + workerPayment: 0.01 (number) - payment (in USD) for workers who work on jobs in this campaign.
 + results: 3 (number) - number of results that should be generated for each job of the campaign
-+ maxResultsPerWorker: 1 (number, optional) - number of times a single worker can work on each job of the campaign (optional).
++ maxResultsPerWorker: 1 (number, optional) - number of times a single worker can work on each job of the campaign (optional)
 + workerGroup: 1 (number, optional) - id of a workergroup to specify the workers that can work on jobs in this campaign (optional)
 + maxWorkTime: 10 min (string, optional) - time a worker has to work on a job of this campaign (optional)
 + maxUploadTime: 4 hours (string, optional) -  time a worker has to upload the results after finishing his work (optional)
 + maxReviewTime: 3 hours - (string, optional) - timeframe in which results can be (soft-) rejected before they get auto approved (optional)
-+ training: false (boolean, optional) - if this campaign is a training for future jobs (optional).
-+ properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional)ark .
++ training: false (boolean, optional) - if this campaign is a training for future jobs (optional)
++ properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional)
 
 ## RESPONSECampaign (object)
 
@@ -1348,8 +1348,8 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## RESPONSETaskResult (object)
 + task (SingleTask)
-+ startedAt (string)
-+ completedAt (string)
++ startedAt: `2017-08-02T13:58:24` (string) - datetime the worker started the task
++ completedAt: `2017-08-02T13:58:24` (string) - datetime the worker completed the task
 + components (array[SingleComponent])
 
 ## RESPONSEJobResult (object)
@@ -1359,16 +1359,16 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## JobResult (object)
 
-+ worker (number)
-+ job (number)
-+ startedAt (string)
-+ completedAt (string)
++ worker: 42 (number) - id of the worker
++ job: 24 (number) - id of the job
++ startedAt: `2017-08-02T13:58:24` (string)  - datetime the worker started the job
++ completedAt: `2017-08-02T13:58:24` (string)  - datetime the worker complted the job
 + state (enum)
     + InReview
     + Approved
     + Rejected
 + taskResults (array[RESPONSETaskResult])
-+ id (number)
++ id: 12 (number) - id of the result
 
 ## ComponentData
 
@@ -1416,13 +1416,13 @@ A video which is playable in a simple video player in the Task. You can set it t
     + Video (string)
     + VideoRecording (string)
 
-+ sticky (boolean, optional) - whether the component should stick at the top of the screen on scrolling. Defaults to `false`
++ sticky: false (boolean, optional) - whether the component should stick at the top of the screen on scrolling. Defaults to `false`
 + Include ComponentData
 + properties(Properties, optional) - a json object containing a set of custom key/value pairs (optional).
 
 ## RESPONSEComponent (REQUESTComponent)
 
-+ sticky (boolean, required) - whether the component should stick at the top of the screen on scrolling
++ sticky: false (boolean, required) - whether the component should stick at the top of the screen on scrolling
 + Include ComponentData
 
 ## ComponentResultData
@@ -1479,43 +1479,43 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## REQUESTApprove (object)
 
-+ message (string, optional) - an optional message for the worker
++ message: Well done! (string, optional) - an optional message for the worker
 
 ## REQUESTReject (object)
 
-+ reason (string, required) - a reason for the rejection that is displayed to the worker
++ reason: Cheating detected! (string, required) - a reason for the rejection that is displayed to the worker
 
 ## REQUESTSoftReject (object)
 
-+ reason (string, required) - a reason for the rejection that is displayed to the worker
-+ until (string, required) - timestamp until when the worker can redo the job
++ reason: Be more precise, please (string, required) - a reason for the rejection that is displayed to the worker provided in Markdown
++ until: `2017-08-02T13:58:24` (string, required) - timestamp until when the worker can redo the job
 
 ## JobProviderBalance (object)
 
-+ available (string) - money available for new campaigns
-+ frozen (string) - money currently frozen for active campaigns
++ available: 42 USD (string) - money available for new campaigns
++ frozen: 24 USD (string) - money currently frozen for active campaigns
 
 ## REQUESTProfile (object)
 
-+ firstName (string)
-+ lastName (string)
-+ phone (string)
-+ organization (string) - name of your organization
-+ website (string) - your organization's website
++ firstName: Jon (string) - your first name
++ lastName: Doe (string) - your last name
++ phone: +123456789 (string) - your phone
++ organization: Swarms Technologies (string) - name of your organization
++ website: www.swarms.com (string) - your organization's website
 
 ## RESPONSEProfile (object)
 
 + Include REQUESTProfile
-+ id (number)
-+ customerId (string)
-+ balance (JobProviderBalance)
-+ email (string)
-+ logo (string) - URL of your logo
-+ commissionRate (number) - commission rate you pay for our platform usage on worker payments
++ id: 42 (number) - your id
++ customerId: AB12CD34 (string) - your customer id
++ balance: (JobProviderBalance) - your current balance
++ email: email@swarms.com (string) - your email
++ logo: https://logo.swarms.com (string) - URL of your logo
++ commissionRate 0.2 (number) - commission rate on worker payments
 
 ## ResultsByWorker (object)
 
-+ worker (number)
++ worker: 42 (number) - id of the worker
 + jobResults (array[JobResult])
 
 ## RESPONSEResultByWorker (object)
@@ -1525,8 +1525,8 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## SingleTask (object)
 
-+ id (number)
-+ name (string)
++ id: 42 (number) - id of the task
++ name: My first Task (string) name of the task
 
 ## SingleComponent (object)
 
@@ -1540,11 +1540,11 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## SingleComponentResultByTask (object)
 
-+ jobResult (number)
-+ worker (number)
-+ job (number)
-+ startedAt (string)
-+ completedAt (string)
++ jobResult: 42 (number) - id of the job result
++ worker: 24 (number) - id of the worker
++ job: 12 (number) - id of the job
++ startedAt: `2017-08-02T13:58:24` (string) - datetime the worker started the job
++ completedAt `2017-08-02T13:58:24` (string) - datetime the worker completed the job
 + result (array[ComponentResultData])
 
 ## ResultsByTask (object)
