@@ -829,6 +829,7 @@ The Worker will only get paid at the moment his Results get `approved`.
 
     + id (number) - id of the result
     + limit (number, optional) - the number of elements being fetched. Default is 10.
+    + since (string, optional) - only fetch results that were submitted after a specific date. Format as in `2018-03-14T03:14`.
 
 + Request (application/json)
 
@@ -861,13 +862,16 @@ The Worker will only get paid at the moment his Results get `approved`.
     + Attributes (RESPONSEWorkerInResults)  
  
 
-
-### List all Results for a Campaign grouped by Workers [GET /campaigns/{id}/results/grouped-by-worker{?limit}]
+### List all Results for a Campaign for a specific Worker [GET /campaigns/{campaignId}/workers/{workerId}/results{?limit}{?state}{?since}]
 
 + Parameter
 
-    + id (number) - id of the result
+    + campaignId (number) - id of the campaign
+    + workerId (number) - id of the worker
     + limit (number, optional) - the number of elements being fetched. Default is 10.
+    + since (string, optional) - only fetch results that were submitted after a specific date. Format as in `2018-03-14T03:14`.
+    + state (string, optional) - filter results by state. One of `InReview`, `Approved`, `Rejected`.
+    
 
 + Request (application/json)
 
@@ -878,7 +882,7 @@ The Worker will only get paid at the moment his Results get `approved`.
 
 + Response 200 (application/json)
 
-    + Attributes (RESPONSEResultByWorker)  
+    + Attributes (RESPONSEJobResult)  
  
 
 ### Approve a Result [POST /results/{id}/approve]
@@ -1548,7 +1552,7 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## ResultsByWorker (object)
 
-+ worker: 42 (number) - id of the worker
++ worker: (RESPONSEWorkerInResults)
 + jobResults (array[JobResult])
 
 ## RESPONSEResultByWorker (object)
