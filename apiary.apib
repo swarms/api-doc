@@ -841,6 +841,27 @@ The Worker will only get paid at the moment his Results get `approved`.
 
     + Attributes (RESPONSEJobResult)
 
+### List all Workers that participated in a Campaign [GET /campaigns/{id}/workers{?limit}{?InReview}]
+
++ Parameter
+
+    + id (number) - id of the result
+    + limit (number, optional) - the number of elements being fetched. Default is 10.
+    + InReview (boolean, optional) - if true, only workers that currently have results in review will be fetched.
+
++ Request (application/json)
+
+    + Headers
+
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
++ Response 200 (application/json)
+
+    + Attributes (RESPONSEWorkerInResults)  
+ 
+
+
 ### List all Results for a Campaign grouped by Workers [GET /campaigns/{id}/results/grouped-by-worker{?limit}]
 
 + Parameter
@@ -858,24 +879,7 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Response 200 (application/json)
 
     + Attributes (RESPONSEResultByWorker)  
-
-### List all Results for a Campaign grouped by Tasks [GET /campaigns/{id}/results/grouped-by-task{?limit}]
-
-+ Parameter
-
-    + id (number) - id of the result
-    + limit (number, optional) - the number of elements being fetched. Default is 10.
-
-+ Request (application/json)
-
-    + Headers
-
-            X-API-Version: 1.0
-            X-Auth-Token: token
-
-+ Response 200 (application/json)
-
-    + Attributes (RESPONSEResultsByTask)  
+ 
 
 ### Approve a Result [POST /results/{id}/approve]
 
@@ -1452,6 +1456,8 @@ A video which is playable in a simple video player in the Task. You can set it t
     + TextInputResult (string)
     + ToggleResult (string)
     + VideoRecordingResult (string)
+    + EmptyResult (string)
+    
 
 + Include ComponentResultData
 
@@ -1516,6 +1522,29 @@ A video which is playable in a simple video player in the Task. You can set it t
 + email: email@swarms.com (string) - your email
 + logo: https://logo.swarms.com (string) - URL of your logo
 + commissionRate: 0.2 (number) - commission rate on worker payments
+
+## RESPONSEWorkersReputation (object)
+
++ me: 100.00 (number) - workers reputation on jobs from you
++ global: 99.99 (number) - workers global reputation on the platform
+
+## RESPONSEWorkersExperience (object)
+
++ me: 24 (number) - workers experience on jobs from you
++ global: 42 (number) - workers global experience on the platform
+
+## RESPONSEWorkersResults (object)
+
++ inReview: 24 (number) - number of results in review in the campaign
++ approved: 42 (number) - number of approved results in the campaign
++ rejected: 24 (number) - number of rejected results in the campaign
+
+## RESPONSEWorkerInResults (object)
+
++ id: (number) - workers id
++ reputation: (RESPONSEWorkersReputation) - workers reputation
++ experience: (RESPONSEWorkersExperience) - workers experience
++ results: (RESPONSEWorkersResults) - workers results counts for the campaign
 
 ## ResultsByWorker (object)
 
