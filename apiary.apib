@@ -1470,14 +1470,18 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## RESPONSEComponentResult (REQUESTComponentResult)
 
-## HATEAOSLink (object)
+## HATEAOSNextLink (object)
 
-+ href (string)
++ href: /resources?after=42&... (string) - url of the next page
+
+## HATEAOSPreviousLink (object)
+
++ href: /resources?before=42&... (string) - url of the previous page
 
 ## PaginationLinks (object)
 
-+ next: /resources?after=42&... (HATEAOSLink) - url of the next page
-+ previous: /resources?before=42&... (HATEAOSLink) - url of the previous page
++ next (HATEAOSNextLink)
++ previous (HATEAOSPreviousLink)
 
 ## RESPONSETaskList (object)
 
