@@ -1473,8 +1473,8 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## PaginationLinks (object)
 
-+ next: resources?after=42 (HATEAOSLink) - url of the next page
-+ previous: resources?before=42 (HATEAOSLink) - url of the previous page
++ next: /resources?after=42&... (HATEAOSLink) - url of the next page
++ previous: /resources?before=42&... (HATEAOSLink) - url of the previous page
 
 ## RESPONSETaskList (object)
 
@@ -1543,22 +1543,23 @@ A video which is playable in a simple video player in the Task. You can set it t
 + approved: 42 (number) - number of approved results in the campaign
 + rejected: 24 (number) - number of rejected results in the campaign
 
-## RESPONSEWorkerInResults (object)
+## WorkerInResults (object)
 
 + id: (number) - workers id
 + reputation: (RESPONSEWorkersReputation) - workers reputation
 + experience: (RESPONSEWorkersExperience) - workers experience
 + results: (RESPONSEWorkersResults) - workers results counts for the campaign
 
-## ResultsByWorker (object)
+## RESPONSEWorkerInResults (object)
 
-+ worker: (RESPONSEWorkerInResults)
-+ jobResults (array[JobResult])
++ _links (PaginationLinks)
++ workers: (array[WorkerInResults])
 
 ## RESPONSEResultByWorker (object)
 
 + _links (PaginationLinks)
-+ jobResultsByWorker (array[ResultsByWorker])
++ results (array[JobResult])
++ worker (RESPONSEWorkerInResults)
 
 ## SingleTask (object)
 
