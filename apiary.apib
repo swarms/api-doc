@@ -902,22 +902,6 @@ The Worker will only get paid at the moment his Results get `approved`.
 
 + Response 200 (application/json)
 
-### Reject a Result [POST /results/{id}/reject]
-
-+ Parameter
-
-    + id (number) - id of the result
-
-+ Request (application/json)
-
-    + Headers
-
-            X-API-Version: 1.0
-            X-Auth-Token: token
-
-    + Attributes (REQUESTReject)
-
-+ Response 200 (application/json)
 
 
 ### Approve all in review Results of a Worker [POST /campaigns/{campaignId}/workers/{workerId}/approve-all]
@@ -974,6 +958,8 @@ The Worker will only get paid at the moment his Results get `approved`.
     + Attributes (REQUESTReject)
 
 + Response 200 (application/json)
+
+
 
 ### Soft-reject a Result [POST /results/{id}/soft-reject]
 
