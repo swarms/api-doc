@@ -979,6 +979,28 @@ The Worker will only get paid at the moment his Results get `approved`.
 + Response 200 (application/json)
 
 
+### HTML Markdown message Preview [POST /preview/markdown]
+
++ Request (application/json)
+
+    + Headers
+
+            X-API-Version: 1.0
+            X-Auth-Token: token
+
+    + Body
+
+        {
+            "text": "# Markdown Feedback
+                    Get a HTML preview of the message you include as feedback to the worker in the results actions.
+                    Find a Markdown cheat sheet at: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet.
+                    You can include videos ans audio data the same way as images, i.e. `![alt text](https://example.com/video.mp4 "Sample video")`.
+                    It is also possible to include youtube videos: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#youtube-videos."
+        }
+
++ Response 200 (application/json)
+
+
 # Group Components Overview
 
 Here you can see the all currently supported components that you can use to build your Tasks.
