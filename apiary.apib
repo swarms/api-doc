@@ -823,7 +823,7 @@ The Worker will only get paid at the moment his Results get `approved`.
 
 + Attributes (JobResult)
 
-### List all Results for a Campaign [GET /campaigns/{id}/results{?limit}]
+### List all Results for a Campaign [GET /campaigns/{id}/results{?limit}{?since}]
 
 + Parameter
 
@@ -1583,7 +1583,7 @@ A video which is playable in a simple video player in the Task. You can set it t
 + Include REQUESTProfile
 + id: 42 (number) - your id
 + customerId: AB12CD34 (string) - your customer id
-+ balance: (JobProviderBalance) - your current balance
++ balance (JobProviderBalance) - your current balance
 + email: email@swarms.com (string) - your email
 + logo: https://logo.swarms.com (string) - URL of your logo
 + commissionRate: 0.2 (number) - commission rate on worker payments
@@ -1607,15 +1607,15 @@ A video which is playable in a simple video player in the Task. You can set it t
 
 ## WorkerInResults (object)
 
-+ id: (number) - workers id
-+ reputation: (RESPONSEWorkersReputation) - workers reputation
-+ experience: (RESPONSEWorkersExperience) - workers experience
-+ results: (RESPONSEWorkersResults) - workers results counts for the campaign
++ id: 42 (number) - workers id
++ reputation (RESPONSEWorkersReputation) - workers reputation
++ experience (RESPONSEWorkersExperience) - workers experience
++ results (RESPONSEWorkersResults) - workers results counts for the campaign
 
 ## RESPONSEWorkerInResults (object)
 
 + _links (PaginationLinks)
-+ workers: (array[WorkerInResults])
++ workers (array[WorkerInResults])
 
 ## RESPONSEResultByWorker (object)
 
