@@ -823,13 +823,15 @@ The Worker will only get paid at the moment his Results get `approved`.
 
 + Attributes (JobResult)
 
-### List all Results for a Campaign [GET /campaigns/{id}/results{?limit}{?since}]
+### List all Results for a Campaign [GET /campaigns/{id}/results{?limit}{?state}{?since}]
 
 + Parameter
 
     + id (number) - id of the result
     + limit (number, optional) - the number of elements being fetched. Default is 10.
+    + state (string, optional) - filter results by state. One of `InReview`, `Approved`, `Rejected`.    
     + since (string, optional) - only fetch results that were submitted after a specific date. Format as in `2018-03-14T03:14`.
+    
 
 + Request (application/json)
 
@@ -869,8 +871,8 @@ The Worker will only get paid at the moment his Results get `approved`.
     + campaignId (number) - id of the campaign
     + workerId (number) - id of the worker
     + limit (number, optional) - the number of elements being fetched. Default is 10.
+    + state (string, optional) - filter results by state. One of `InReview`, `Approved`, `Rejected`.    
     + since (string, optional) - only fetch results that were submitted after a specific date. Format as in `2018-03-14T03:14`.
-    + state (string, optional) - filter results by state. One of `InReview`, `Approved`, `Rejected`.
     
 
 + Request (application/json)
